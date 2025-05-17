@@ -1,0 +1,21 @@
+name: soul-to-soul-app
+services:
+  - name: frontend
+    environment_slug: node-js
+    source_dir: client
+    build_command: npm install && npm run build
+    output_dir: dist
+    routes:
+      - path: /
+    envs:
+      - key: VITE_BACKEND_URL
+        value: /api
+
+  - name: backend
+    environment_slug: node-js
+    source_dir: api
+    build_command: npm install
+    run_command: npm start
+    routes:
+      - path: /api
+
