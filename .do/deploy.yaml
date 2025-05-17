@@ -1,4 +1,4 @@
-name: soul-to-soul-app
+name: s2sbquiz-client
 services:
   - name: frontend
     environment_slug: node-js
@@ -8,14 +8,7 @@ services:
     routes:
       - path: /
     envs:
-      - key: VITE_BACKEND_URL
-        value: /api
-
-  - name: backend
-    environment_slug: node-js
-    source_dir: api
-    build_command: npm install
-    run_command: npm start
-    routes:
-      - path: /api
-
+      - key: VITE_SUPABASE_URL
+        value: https://lfyqxjzskbnisxozwzdk.supabase.co
+      - key: VITE_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmeXF4anpza2JuaXN4b3p3emRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0OTAwNzgsImV4cCI6MjA2MzA2NjA3OH0.NOYMPpWWf0ThDe-G-D1HVWoVZqFKtWxbWP-ymNheEi8
