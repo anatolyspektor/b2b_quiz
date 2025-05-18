@@ -67,7 +67,7 @@ export default function OptInMobile({ onNext }) {
       </div>
 
       <img
-        src="./report_test_1.jpg"
+        src="/report_test_1.jpg"
         alt="Scorecard preview"
         className="mb-5 mt-5 w-full max-w-2xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
       />
