@@ -9,4 +9,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  preview: {
+    port: 8080,
+    allowedHosts: ['s2sb-quiz-s2edt.ondigitalocean.app']
+  },
 })
