@@ -13,4 +13,4 @@ services:
       - key: VITE_SUPABASE_URL
         value: https://lfyqxjzskbnisxozwzdk.supabase.co
       - key: VITE_SUPABASE_ANON_KEY
-        value: your-real-key
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmeXF4anpza2JuaXN4b3p3emRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0OTAwNzgsImV4cCI6MjA2MzA2NjA3OH0.NOYMPpWWf0ThDe-G-D1HVWoVZqFKtWxbWP-ymNheEi8

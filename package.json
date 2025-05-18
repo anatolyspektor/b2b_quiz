@@ -5,7 +5,7 @@
   "scripts": {
   "dev": "vite",
   "build": "vite build",
-  "preview": "vite preview --port 8080"
+  "preview": "vite preview --port 8080  --host"
 },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
