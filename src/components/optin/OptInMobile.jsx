@@ -10,18 +10,18 @@ import { trackEvent } from "../../utils/trackEvent";
 
 const features = [
   {
-    name: "Doing your team’s job?",
-    description: "Find out where things break when you're not there.",
+    name: "Answer Few Questions",
+    description: "2-min Quiz will give you an AHA moment why you are stuck",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Tired and burned out?",
-    description: "See what’s wasting your time and messing up your team.",
+    name: "Get Peronalized Scorecard",
+    description: "Based on your answers we generate personalized report.",
     icon: LockClosedIcon,
   },
   {
-    name: "Want your freedom back?",
-    description: "This 2-minute quiz shows what’s keeping you stuck — and how to fix it. For B2B product founders.",
+    name: "Understand Next Steps",
+    description: "In the report you get suggetions and next step to get you unstuck",
     icon: ServerIcon,
   },
 ];
@@ -59,21 +59,18 @@ export default function OptInMobile({ onNext }) {
       style={{ backgroundColor: background }}
     >
       <div className="text-center space-y-4">
-        <h2 className="mx-10 text-2xl text-left font-semibold text-gray-300">
-          Free Quiz
-        </h2>
-        <h1 className="mx-5 text-left text-8xl font-bold text-white leading-snug">
+        <h1 className="mx-5 text-center text-8xl font-bold text-white leading-snug">
           WORKING <span className="text-[#FF8257]">60 HOUR WEEKS?</span>
         </h1>
-        <p className="text-4xl text-gray-200 mt-2">
-          Find your bottleneck in 2 minutes — and fix it
+        <p className="text-5xl text-gray-200 mt-2">
+          Find where the issue is in 2 minutes
         </p>
       </div>
 
       <img
         src="/report_test_1.jpg"
         alt="Scorecard preview"
-        className="mb-5 mt-5 w-full max-w-2xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
+        className="mb-5 mt-5 w-full max-w-xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
       />
 
       <div className="space-y-6 text-left w-full max-w-4xl">
@@ -81,10 +78,10 @@ export default function OptInMobile({ onNext }) {
           <div key={feature.name} className="flex items-start gap-4 mb-5">
             <feature.icon className="text-2xl h-15 w-15 text-[#FF8257] mt-1" />
             <div>
-              <p className="text-5xl font-semibold text-[#FF8257] mb-5">
+              <p className="text-6xl font-semibold text-[#FF8257] mb-5">
                 {feature.name}
               </p>
-              <p className="text-gray-200 text-3xl">{feature.description}</p>
+              <p className="text-gray-200 text-4xl text-left">{feature.description}</p>
             </div>
           </div>
         ))}

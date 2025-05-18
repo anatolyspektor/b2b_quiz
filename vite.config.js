@@ -12,5 +12,11 @@ export default defineConfig({
   preview: {
     port: 8080,
     allowedHosts: ['s2sb-quiz-s2edt.ondigitalocean.app']
+  }, // FOR DEV
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+    allowedHosts: ['.ngrok-free.app'],
   },
 })
