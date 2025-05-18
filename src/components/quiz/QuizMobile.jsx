@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import questions from "../../questions";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import {
-  isValidEmail,
-  handleOptionAnswer,
-  isAnswerSelected,
-} from "../../utils/quizUtils";
-
 import { saveCustomer } from "../../utils/saveCustomer";
 import { trackEvent } from "../../utils/trackEvent";
 import { getSessionId } from "../../utils/getSessionId";
@@ -21,14 +15,24 @@ export default function QuizMobile({ onComplete }) {
 
   const currentQuestion = questions[step];
   const TOTAL_QUESTIONS = questions.length;
-   const sessionId = getSessionId();
+
+  const sessionId = getSessionId();
+
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleAnswer = (option) => {
-    const updatedAnswers = handleOptionAnswer({
-      value: option.label,
-      question: currentQuestion,
-      prevAnswers: answers,
-    });
+    const value = option.label; // ✅ Use option.label
+    let updatedAnswers = { ...answers };
+
+    if (currentQuestion.multi) {
+      const currentVals = updatedAnswers[currentQuestion.field] || [];
+      const exists = currentVals.includes(value);
+      updatedAnswers[currentQuestion.field] = exists
+        ? currentVals.filter((v) => v !== value)
+        : [...currentVals, value];
+    } else {
+      updatedAnswers[currentQuestion.field] = value;
+    }
 
     setAnswers(updatedAnswers);
 
@@ -40,8 +44,7 @@ export default function QuizMobile({ onComplete }) {
         setStep((prev) => prev + 1);
       }
     }
-
-   trackEvent({
+    trackEvent({
       event: `quiz_step_${step + 1}`,
       sessionId,
       device: "mobile",
@@ -56,21 +59,28 @@ export default function QuizMobile({ onComplete }) {
     if (step > 0) setStep((prev) => prev - 1);
   };
 
-  const handleFinalSubmit = () => {
+  const handleFinalSubmit = async () => {
     if (name && isValidEmail(email)) {
-     trackEvent({
+      await saveCustomer({ name, email, sessionId, device: "desktop" });
+
+      trackEvent({
         event: "quiz_complete",
         sessionId,
         device: "mobile",
         metadata: answers,
       });
+
       onComplete({ ...finalAnswers, name, email });
     }
   };
 
   const isSelected = (value) => {
-    return isAnswerSelected({ question: currentQuestion, answers, value });
+    const val = answers[currentQuestion?.field];
+    return currentQuestion?.multi
+      ? Array.isArray(val) && val.includes(value)
+      : val === value;
   };
+
 
   if (isQuizFinished) {
     return (

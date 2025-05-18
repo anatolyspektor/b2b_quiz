@@ -45,7 +45,11 @@ export default function OptInMobile({ onNext }) {
   }, []);
 
   const handleClick = () => {
-    trackEvent("optin_click", sessionId);
+    trackEvent({
+      event: "optin_click",
+      sessionId,
+      device: "mobile",
+    });
     onNext();
   };
 
