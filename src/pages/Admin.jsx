@@ -27,9 +27,9 @@ export default function Admin() {
       </div>
 
       <div className="grid grid-cols-3 gap-6">
-        <Stat label="Impressions" value={metrics.impressions} />
-        <Stat label="Clicks" value={metrics.clicks} />
-        <Stat label="Completions" value={metrics.completed} />
+        <Stat label="Page Views" value={metrics.impressions} />
+        <Stat label="Opt In Clicks" value={metrics.clicks} />
+        <Stat label="Quiz Completions" value={metrics.completed} />
       </div>
 
       <Section title="📱 Devices">
@@ -40,7 +40,7 @@ export default function Admin() {
         </div>
       </Section>
 
-      <Section title="🧩 Quiz Steps">
+      <Section title="🧩 Quiz Steps Drop Off">
         <div className="grid grid-cols-3 gap-4">
           {metrics.quizSteps.map(s => (
             <Stat key={s.event} label={s.event} value={s.count} />

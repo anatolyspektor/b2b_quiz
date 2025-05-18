@@ -82,7 +82,7 @@ export default function OptInDesktop(props) {
             </div>
           </div>
 
-          <div className="w-full px-4 flex flex-col items-center gap-8">
+          <div className="w-full px-4 py-20 flex flex-col items-center gap-8">
             <img
               src="/report_test_1.jpg"
               width={2432}
