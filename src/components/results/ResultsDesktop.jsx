@@ -74,7 +74,7 @@ export default function Results({ name = "Founder", email = "", answers = "" }) 
         <div className="rounded-lg overflow-hidden ring-2 ring-white ring-opacity-10 mt-6">
           <Cal
             namespace="clarity-audit"
-            calLink="anatolyspektor/clarity-audit"
+            calLink={`anatolyspektor/clarity-audit?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`}
             style={{ width: "100%", height: "100%", overflow: "scroll" }}
             config={{ layout: "month_view" }}
           />
