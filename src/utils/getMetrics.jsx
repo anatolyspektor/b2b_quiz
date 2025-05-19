@@ -8,10 +8,12 @@ export const getMetrics = async () => {
 
   if (error) throw error
 
+  // Funnel totals
   const impressions = new Set(events.filter(e => e.event === "optin_impression").map(e => e.session_id)).size
   const clicks = new Set(events.filter(e => e.event === "optin_click").map(e => e.session_id)).size
   const completed = new Set(events.filter(e => e.event === "quiz_complete").map(e => e.session_id)).size
 
+  // Devices
   const byDevice = Object.entries(
     events.reduce((acc, e) => {
       const device = e.device || "unknown"
@@ -21,6 +23,7 @@ export const getMetrics = async () => {
     }, {})
   ).map(([device, set]) => ({ device, count: set.size }))
 
+  // Quiz Steps
   const quizSteps = Object.entries(
     events.reduce((acc, e) => {
       if (!e.event.startsWith("quiz_step_")) return acc
@@ -30,32 +33,82 @@ export const getMetrics = async () => {
     }, {})
   ).map(([step, set]) => ({ event: step, count: set.size }))
 
-  const campaignData = {}
-  const stepsByCampaign = {}
+  // UTM Campaigns + Variants
+  const utmVariantMap = {}
 
   events.forEach(e => {
-    const campaign = e.metadata?.utm?.campaign
-    if (!campaign) return
+    const campaign = e.metadata?.utm?.campaign || "No UTM"
+    const variant = e.variant || "unknown"
+    const session = e.session_id
 
-    campaignData[campaign] = campaignData[campaign] || { impressions: 0, completions: 0 }
+    utmVariantMap[campaign] = utmVariantMap[campaign] || {}
+    utmVariantMap[campaign][variant] = utmVariantMap[campaign][variant] || {
+      variant,
+      impressions: new Set(),
+      conversions: new Set(),
+    }
 
-    if (e.event === "optin_impression") campaignData[campaign].impressions++
-    if (e.event === "quiz_complete") campaignData[campaign].completions++
+    if (e.event === "optin_impression") utmVariantMap[campaign][variant].impressions.add(session)
+    if (e.event === "optin_click") utmVariantMap[campaign][variant].conversions.add(session)
+  })
+
+  const utmFunnelsDetailed = Object.entries(utmVariantMap).map(([campaign, variants]) => ({
+    campaign,
+    variants: Object.values(variants).map(v => {
+      const impressions = v.impressions.size
+      const conversions = v.conversions.size
+      const conversionRate = impressions > 0 ? Math.round((conversions / impressions) * 100) : 0
+      return {
+        variant: v.variant,
+        impressions,
+        conversions,
+        conversionRate,
+      }
+    }),
+  }))
+
+  // A/B Test Groups
+  const testGroups = {}
+
+  events.forEach(e => {
+    const testName = e.test_name
+    const variant = e.variant
+    if (!testName || !variant) return
+
+    testGroups[testName] = testGroups[testName] || {}
+    const group = testGroups[testName]
+
+    group[variant] = group[variant] || {
+      variant,
+      impressions: new Set(),
+      conversions: new Set(),
+      quizSteps: {},
+    }
+
+    if (e.event === "optin_impression") group[variant].impressions.add(e.session_id)
+    if (e.event === "optin_click") group[variant].conversions.add(e.session_id)
 
     if (e.event.startsWith("quiz_step_")) {
-      stepsByCampaign[campaign] = stepsByCampaign[campaign] || {}
-      stepsByCampaign[campaign][e.event] = stepsByCampaign[campaign][e.event] || new Set()
-      stepsByCampaign[campaign][e.event].add(e.session_id)
+      group[variant].quizSteps[e.event] = group[variant].quizSteps[e.event] || new Set()
+      group[variant].quizSteps[e.event].add(e.session_id)
     }
   })
 
-  const utmFunnel = Object.entries(campaignData).map(([campaign, data]) => ({
-    campaign,
-    impressions: data.impressions,
-    completions: data.completions,
-    steps: Object.fromEntries(
-      Object.entries(stepsByCampaign[campaign] || {}).map(([step, set]) => [step, set.size])
-    ),
+  const byVariantTest = Object.entries(testGroups).map(([testName, variants]) => ({
+    test_name: testName,
+    variants: Object.values(variants).map(v => {
+      const impressions = v.impressions.size
+      const conversions = v.conversions.size
+      return {
+        variant: v.variant,
+        impressions,
+        conversions,
+        conversionRate: impressions > 0 ? Math.round((conversions / impressions) * 100) : 0,
+        quizSteps: Object.fromEntries(
+          Object.entries(v.quizSteps).map(([step, set]) => [step, set.size])
+        ),
+      }
+    }),
   }))
 
   return {
@@ -64,6 +117,7 @@ export const getMetrics = async () => {
     completed,
     byDevice,
     quizSteps,
-    utmFunnel,
+    byVariantTest,
+    utmFunnelsDetailed,
   }
-}
+} 

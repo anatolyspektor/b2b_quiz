@@ -6,6 +6,9 @@ import {
 } from "@heroicons/react/20/solid";
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
+import { getABVariant } from "@/utils/abTest";
+
+const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
 const features = [
   {
@@ -39,6 +42,8 @@ export default function OptInDesktop(props) {
         event: "optin_impression",
         sessionId,
         device:  "desktop",
+        variant: titleVariant,
+        test_name: "optin_title"
       });
       hasTracked.current = true;
     }
@@ -49,6 +54,8 @@ export default function OptInDesktop(props) {
       event: "optin_click",
       sessionId,
       device: "desktop",
+      variant: titleVariant,
+      test_name: "optin_title"
     });
     props.onNext();
   };
@@ -62,7 +69,11 @@ export default function OptInDesktop(props) {
             <div className="max-w-full lg:max-w-xl mx-auto lg:mx-0">
               <h2 className="text-2xl sm:text-3xl lg:text-lg font-semibold text-gray-400">Free Quiz</h2>
               <p className="mt-4 text-6xl sm:text-7xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-                STILL WORKING <span className="text-[#FF8257]">60 HOUR WEEKS?</span>
+                {titleVariant === "A" ? (
+                  <>STILL WORKING <span className="text-[#FF8257]">60 HOUR WEEKS?</span></>
+                ) : (
+                  <>MAKING MONEY BUT <span className="text-[#FF8257]">BURNT OUT?</span></>
+                )}
               </p>
               <p className="mt-8 text-xl  text-gray-200">
                 This 2-minute scorecard shows where you’re still the bottleneck — and how to fix it.

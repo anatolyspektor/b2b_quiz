@@ -7,6 +7,9 @@ import {
 
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
+import { getABVariant } from "@/utils/abTest";
+
+const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
 const features = [
   {
@@ -39,6 +42,8 @@ export default function OptInMobile({ onNext }) {
         event: "optin_impression",
         sessionId,
         device:  "mobile",
+        variant: titleVariant,
+        test_name: "optin_title"
       });
       hasTracked.current = true;
     }

@@ -11,7 +11,7 @@ function getUTMParams() {
   }
 }
 
-export const trackEvent = async ({ event, sessionId, device, metadata = {} }) => {
+export const trackEvent = async ({ event, sessionId, device, variant = '', test_name = '', metadata = {} }) => {
   const referer = document.referrer || window.location.href
   const utmKey = `utm_saved`
   const trackKey = `tracked_${event}_${sessionId}`
@@ -32,6 +32,8 @@ export const trackEvent = async ({ event, sessionId, device, metadata = {} }) =>
       device,
       referer,
       metadata: fullMetadata,
+      variant: variant,
+      test_name: test_name
     })
 
     if (error) throw error
