@@ -10,6 +10,7 @@ import { getABVariant } from "@/utils/abTest";
 
 const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
+
 const features = [
   {
     name: "Doing your team’s job?",
@@ -42,8 +43,6 @@ export default function OptInDesktop(props) {
         event: "optin_impression",
         sessionId,
         device:  "desktop",
-        variant: titleVariant,
-        test_name: "optin_title"
       });
       hasTracked.current = true;
     }
@@ -54,8 +53,6 @@ export default function OptInDesktop(props) {
       event: "optin_click",
       sessionId,
       device: "desktop",
-      variant: titleVariant,
-      test_name: "optin_title"
     });
     props.onNext();
   };

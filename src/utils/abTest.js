@@ -9,5 +9,9 @@ export function getABVariant(testName, variants) {
     localStorage.setItem(key, variant);
   }
 
+    // Also set globally for tracking context
+  localStorage.setItem("variant", variant)
+  localStorage.setItem("test_name", testName)
+
   return variant;
 }

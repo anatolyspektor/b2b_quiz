@@ -42,8 +42,6 @@ export default function OptInMobile({ onNext }) {
         event: "optin_impression",
         sessionId,
         device:  "mobile",
-        variant: titleVariant,
-        test_name: "optin_title"
       });
       hasTracked.current = true;
     }

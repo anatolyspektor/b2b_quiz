@@ -11,12 +11,19 @@ function getUTMParams() {
   }
 }
 
-export const trackEvent = async ({ event, sessionId, device, variant = '', test_name = '', metadata = {} }) => {
+
+export const trackEvent = async ({
+  event,
+  sessionId,
+  device,
+  variant = localStorage.getItem("variant") || '',
+  test_name = localStorage.getItem("test_name") || '',
+  metadata = {}
+}) => {
   const referer = document.referrer || window.location.href
   const utmKey = `utm_saved`
   const trackKey = `tracked_${event}_${sessionId}`
 
-  // ⛔ prevent duplicate event for same session
   if (localStorage.getItem(trackKey)) return
 
   const shouldSendUTM = !localStorage.getItem(utmKey)
@@ -32,13 +39,12 @@ export const trackEvent = async ({ event, sessionId, device, variant = '', test_
       device,
       referer,
       metadata: fullMetadata,
-      variant: variant,
-      test_name: test_name
+      variant,
+      test_name,
     })
 
     if (error) throw error
 
-    // ✅ mark as sent
     localStorage.setItem(trackKey, "true")
     if (shouldSendUTM) {
       localStorage.setItem(utmKey, "true")
