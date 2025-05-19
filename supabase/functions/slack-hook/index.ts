@@ -14,7 +14,7 @@ serve(async (req) => {
 
   const body = await req.json()
 
-  const webhookUrl = "https://hooks.slack.com/services/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"
+  const webhookUrl = Deno.env.get("SLACK_WEBHOOK_URL");
 
   const slackPayload = {
     text: body.text || "📞 New Event",
