@@ -65,7 +65,16 @@ export default function Admin() {
           value={metrics.completed}
           conversionRate={metrics.clicks > 0 ? Math.round((metrics.completed / metrics.clicks) * 100) : undefined}
         />
-        <Stat label="Calls Booked" value="TBD" conversionRate="" />
+        <Stat
+          label="Calls Booked"
+          value={metrics.callsBooked}
+          conversionRate={
+            metrics.completed > 0
+              ? Math.round((metrics.callsBooked / metrics.completed) * 100)
+              : undefined
+          }
+        />
+
       </div>
 
       <Section title="🧩 Quiz Steps Drop Off">

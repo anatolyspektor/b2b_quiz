@@ -12,6 +12,8 @@ export const getMetrics = async () => {
   const impressions = new Set(events.filter(e => e.event === "optin_impression").map(e => e.session_id)).size
   const clicks = new Set(events.filter(e => e.event === "optin_click").map(e => e.session_id)).size
   const completed = new Set(events.filter(e => e.event === "quiz_complete").map(e => e.session_id)).size
+  const callsBooked = new Set(events.filter(e => e.event === "call_booked").map(e => e.session_id)).size
+
 
   // Devices
   const byDevice = Object.entries(
@@ -115,6 +117,7 @@ export const getMetrics = async () => {
     impressions,
     clicks,
     completed,
+    callsBooked, // ✅ Add this line
     byDevice,
     quizSteps,
     byVariantTest,

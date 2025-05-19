@@ -14,7 +14,7 @@ serve(async (req) => {
 
   const body = await req.json()
 
-  const webhookUrl = "https://hooks.slack.com/services/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"
+  const webhookUrl = "https://hooks.slack.com/services/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"
 
   const slackPayload = {
     text: body.text || "📞 New Event",
