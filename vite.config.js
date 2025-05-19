@@ -11,7 +11,7 @@ export default defineConfig({
   },
   preview: {
     port: 8080,
-    allowedHosts: ['s2sb-quiz-s2edt.ondigitalocean.app']
+    allowedHosts: ['s2sb-quiz-s2edt.ondigitalocean.app','scalecheck.co']
   }, // FOR DEV
   server: {
     host: true,
