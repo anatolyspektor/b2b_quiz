@@ -41,7 +41,7 @@ export default function ResultsMobile({ name = "Founder", email = "", answers = 
       <div className="bg-white text-[#275659] p-6 rounded-2xl">
         <h2 className="text-center text-6xl font-bold mb-3 mt-3">Here are some notes:</h2>
         {chokePoints.length > 0 ? (
-          <ul className="mt-10 mb-5 list-inside space-y-7 text-3xl text-center marker:text-[#FF8257]">
+          <ul className="mt-10 mb-10 space-y-15  text-4xl text-center marker:text-[#FF8257]">
             {chokePoints.map((point, i) => (
               <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
             ))}
