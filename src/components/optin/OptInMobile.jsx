@@ -84,7 +84,7 @@ export default function OptInMobile({ onNext }) {
               <p className="text-6xl font-semibold  mb-5" style={{ color: primary }}>
                 {feature.name}
               </p>
-              <p className="text-gray-200 text-4xl/15 text-left">{feature.description}</p>
+              <p className="text-gray-200 text-4xl/12 text-left">{feature.description}</p>
             </div>
           </div>
         ))}
@@ -92,7 +92,7 @@ export default function OptInMobile({ onNext }) {
 
       <button
         onClick={handleClick}
-        className="w-full mt-5 max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition "
+        className="w-full  max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition "
         style={{ backgroundColor: "#FF5C5C" }}
 
       >
