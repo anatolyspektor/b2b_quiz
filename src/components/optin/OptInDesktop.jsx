@@ -81,7 +81,7 @@ export default function OptInDesktop(props) {
                   <div key={feature.name} className="relative pl-14">
                     <dt className="block mb-2 text-orange-500" style={{ color: primary }}>
                       <feature.icon className="absolute top-0 left-0 h-10 w-10" />
-                      <span className="text-xl font-semibold">{feature.name}</span>
+                      <span className="text-3xl font-semibold">{feature.name}</span>
                     </dt>
                     <dd className="text-gray-200 text-lg">{feature.description}</dd>
                   </div>
