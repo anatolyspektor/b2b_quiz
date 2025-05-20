@@ -71,6 +71,7 @@ export default function QuizMobile({ onComplete }) {
       });
 
       onComplete({ ...finalAnswers, name, email });
+      sendSlackEmailAdded({session_id: sessionId,name,email});
     }
   };
 
