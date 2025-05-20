@@ -112,8 +112,8 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
 
   if (isQuizFinished) {
     return (
-      <section className="min-h-screen flex items-center justify-center px-8 py-20" style={{ backgroundColor: "#275659" }}>
-        <div className="w-full max-w-4xl bg-white/5 backdrop-blur px-8 py-12 text-center shadow-sm rounded-lg">
+      <section className="min-h-screen flex items-center justify-center px-8 py-10" style={{ backgroundColor: "#275659" }}>
+        <div className="w-full max-w-4xl bg-white/5 backdrop-blur px-8 py-10 text-center shadow-sm rounded-lg">
           <h2 className="text-4xl mb-6 leading-snug text-[#F1FDED]">
             If you get <strong>DISCONNECTED</strong>, where should we send the results?
           </h2>
@@ -153,7 +153,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-8 py-20" style={{ backgroundColor: "#275659" }}>
+    <section className="min-h-screen flex items-center justify-center px-8 py-1" style={{ backgroundColor: "#275659" }}>
       <div className="w-full max-w-3xl px-8 py-12 text-center shadow-sm rounded-lg">
         <div className="mb-10">
           <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -236,7 +236,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
         )}
 
         {currentQuestion.multi && (
-          <div className="mt-10 text-center">
+          <div className="mt-1 text-center">
             <button
             onClick={() => {
                 if (step + 1 === TOTAL_QUESTIONS) {
