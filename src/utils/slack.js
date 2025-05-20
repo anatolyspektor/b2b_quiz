@@ -33,12 +33,34 @@ export const sendSlackCallBooked = async ({ session_id, test_name, variant, devi
 }
 
 
-export const sendSlackEmailAdded = async ({ session_id, name, email, answers }) => {
+export const sendSlackEmailAdded = async ({
+  session_id,
+  name,
+  email,
+  answers,
+  score,
+  workHrs,
+  zone,
+  color,
+  bleedPerWeek,
+  chokePoints = [],
+}) => {
   const webhookUrl = import.meta.env.VITE_SLACK_WEBHOOK_URL;
 
   const fields = Object.entries(answers)
     .map(([key, val]) => `*${key}*: ${Array.isArray(val) ? val.join(", ") : val}`)
     .join("\n");
+
+  const chokePointText = chokePoints.length > 0
+    ? chokePoints.map((p) => `• ${p.replace(/<[^>]*>/g, "")}`).join("\n")
+    : "None";
+
+  const summary = `
+• *Score:* ${score}
+• *Zone:* ${zone}
+• *Hours/Week:* ${workHrs}
+• *Bleed/Week:* $${Math.round(bleedPerWeek).toLocaleString()}
+`;
 
   const message = {
     text: `📩 New Lead Captured from 2-Minute-Quiz`,
@@ -47,7 +69,14 @@ export const sendSlackEmailAdded = async ({ session_id, name, email, answers }) 
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `📩 *New Lead Captured from 2-Minute-Quiz!*\n• *Session:* \`${session_id}\`\n👤 *Name:* ${name || "n/a"}\n📧 *Email:* ${email || "n/a"}\n`,
+          text: `📩 *New Lead Captured from 2-Minute-Quiz!*\n• *Session:* \`${session_id}\`\n👤 *Name:* ${name || "n/a"}\n📧 *Email:* ${email || "n/a"}\n${summary}`,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `🚧 *Choke Points:*\n${chokePointText}`,
         },
       },
       {
@@ -70,5 +99,3 @@ export const sendSlackEmailAdded = async ({ session_id, name, email, answers }) 
     console.error("❌ Failed to send Slack email_added message:", err);
   }
 };
-
-

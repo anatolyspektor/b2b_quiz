@@ -1,18 +1,20 @@
-import React, { useMemo } from "react";
-import {
-  calculateScore,
-  rangeMidpoint,
-  zoneLabel,
-  moneyLost,
-  getChokePoints,
-} from "../../utils/quizUtils";
+import React from "react";
+import Cal from "@calcom/embed-react";
 
-export default function ResultsMobile({ name = "Founder", email = "", answers = "" }) {
-  const score = useMemo(() => calculateScore(answers), [answers]);
-  const { zone, color } = zoneLabel(score);
-  const workHrs = Math.max(rangeMidpoint(answers.weeklyHours), 1);
-  const bleed = moneyLost(workHrs).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-  const chokePoints = getChokePoints(answers);
+export default function Results({ name = "Founder",email = "",
+  answers = {},
+  score,
+  zone,
+  color,
+  workHrs,
+  bleedPerWeek,
+  chokePoints = [],
+}) {
+  const bleed = bleedPerWeek.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
 
   return (
     <div className="bg-[#275659] text-[#F1FDED] min-h-screen flex flex-col gap-8 py-8 px-4">

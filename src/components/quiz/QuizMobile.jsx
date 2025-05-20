@@ -5,6 +5,7 @@ import { saveCustomer } from "../../utils/saveCustomer";
 import { trackEvent } from "../../utils/trackEvent";
 import { getSessionId } from "../../utils/getSessionId";
 import { sendSlackEmailAdded } from "@/utils/slack"
+import { generateScorecard, getChokePoints} from "@/utils/quizUtils";
 
 export default function QuizMobile({ onComplete }) {
   const [answers, setAnswers] = useState({});
@@ -60,21 +61,47 @@ export default function QuizMobile({ onComplete }) {
     if (step > 0) setStep((prev) => prev - 1);
   };
 
-  const handleFinalSubmit = async () => {
-    if (name && isValidEmail(email)) {
-      await saveCustomer({ name, email, sessionId, device: "mobile", answers });
+const handleFinalSubmit = async ({ sessionId, name, email }) => {
+  if (name && isValidEmail(email)) {
+    const scorecard = generateScorecard(answers);
+    const chokePointsHTML = getChokePoints(answers);
 
-      trackEvent({
-        event: "quiz_complete",
-        sessionId,
-        device: "mobile",
-        metadata: answers,
-      });
+    await saveCustomer({
+      name,
+      email,
+      sessionId,
+      device: "mobile",
+      answers,
+      ...scorecard,
+    });
 
-      onComplete({ ...finalAnswers, name, email });
-      sendSlackEmailAdded({session_id: sessionId,name,email,answers});
-    }
-  };
+    await sendSlackEmailAdded({
+      session_id: sessionId,
+      name,
+      email,
+      answers,
+      ...scorecard,
+    });
+
+    onComplete({
+      name,
+      email,
+      answers,
+      ...scorecard,
+      sessionId,
+      chokePointsHTML, // only for frontend
+    });
+
+    trackEvent({
+      event: "quiz_complete",
+      sessionId,
+      device: "mobile",
+      metadata: answers,
+    });
+  }
+};
+
+
 
   const isSelected = (value) => {
     const val = answers[currentQuestion?.field];
@@ -108,7 +135,13 @@ export default function QuizMobile({ onComplete }) {
             style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
           />
           <button
-            onClick={handleFinalSubmit}
+            onClick={() =>
+              handleFinalSubmit({
+                sessionId,
+                name,
+                email,
+              })
+            }
             disabled={!name || !isValidEmail(email)}
             className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition disabled:opacity-50"
             style={{ backgroundColor: "#FF5C5C" }}

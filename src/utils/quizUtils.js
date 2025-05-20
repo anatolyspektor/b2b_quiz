@@ -42,6 +42,7 @@ export const getChokePoints = (a) => {
   }
   const ops = a.opsTracking || [];
 
+
   if (ops.some(opt => ["Spreadsheets", "Simple software"].includes(opt))) {
     points.push("<strong>Tracking is basic</strong> – hard to spot errors or delegate confidently.");
   } else if (ops.some(opt => ["In my head / paper notes", "We don’t really track it"].includes(opt))) {
@@ -76,3 +77,25 @@ export const isAnswerSelected = ({ question, answers, value }) => {
     ? Array.isArray(val) && val.includes(value)
     : val === value;
 };
+
+export const generateScorecard = (answers) => {
+  const score = calculateScore(answers);
+  const workHrs = Math.max(rangeMidpoint(answers.weeklyHours), 1);
+  const chokePoints = getChokePoints(answers); // HTML version
+  const chokePointsNoHTML = chokePoints.map(p =>
+    p.replace(/<\/?[^>]+(>|$)/g, "")
+  );
+  const { zone, color } = zoneLabel(score);
+  const bleedPerWeek = moneyLost(workHrs);
+
+  return {
+    score,
+    workHrs,
+    zone,
+    color,
+    bleedPerWeek,
+    chokePoints: chokePointsNoHTML, // for Supabase + Slack
+    chokePointsHTML: chokePoints,   // for frontend
+  };
+};
+
