@@ -4,8 +4,9 @@ export default function ScorecardBenchmarkDesktop({
   benchmark = 64,
 }) {
   const scorePct   = Math.min(Math.max(score, 0), 100);
-  const percentile = Math.round(50 + (score - benchmark) * 1.5);
-  const boundedPercentile = Math.max(0, Math.min(percentile, 100));
+  const rawPercentile = 50 + ((score - benchmark) / (100 - benchmark)) * 50;
+  const boundedPercentile = Math.max(1, Math.min(Math.round(rawPercentile), 99));
+
 
   // map zone → Tailwind bg class
   const zoneBg = {
