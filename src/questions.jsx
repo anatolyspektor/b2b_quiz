@@ -34,8 +34,9 @@ const questions = [
   },
   {
     field: "opsTracking",
-    question: "How do you keep track of what your business makes and sells?",
+    question: "How do you keep track of what your business makes and sells? (select all that apply)",
     type: "select",
+    multi: true,
     options: [
       { label: "In my head / paper notes", weight: 20 },
       { label: "Spreadsheets", weight: 6 },

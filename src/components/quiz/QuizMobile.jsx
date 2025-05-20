@@ -198,7 +198,7 @@ export default function QuizMobile({ onComplete }) {
         )}
 
         {currentQuestion.multi && (
-          <div className="mt-8 text-center">
+          <div className="mt-1 text-center">
             <button
               onClick={() => {
                 if (step + 1 === TOTAL_QUESTIONS) {
@@ -208,10 +208,11 @@ export default function QuizMobile({ onComplete }) {
                   setStep((prev) => prev + 1);
                 }
               }}
-              className="text-[#F1FDED] text-base font-medium hover:text-orange-300 transition"
+              className="text-[#F1FDED] text-6xl font-medium hover:text-orange-300 transition"
             >
-              Continue
+              Next Question
             </button>
+
           </div>
         )}
       </div>

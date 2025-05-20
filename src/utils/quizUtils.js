@@ -40,8 +40,14 @@ export const getChokePoints = (a) => {
   if (["Tired but coping", "Running on fumes", "Close to burnout", "Already burnt out"].includes(a.energyLevel)) {
     points.push(`Energy warning – you're currently <strong>${a.energyLevel.toLowerCase()}</strong>. Time to reclaim mental space.`);
   }
-  if (["In my head / paper notes", "Not really tracked"].includes(a.opsTracking)) points.push("Ops & inventory tracking is unreliable or non-existent.");
-  if (["Spreadsheets", "Basic accounting software"].includes(a.opsTracking)) points.push("<strong>Tracking is basic</strong> – hard to spot errors or delegate confidently.");
+  const ops = a.opsTracking || [];
+
+  if (ops.some(opt => ["Spreadsheets", "Simple software"].includes(opt))) {
+    points.push("<strong>Tracking is basic</strong> – hard to spot errors or delegate confidently.");
+  } else if (ops.some(opt => ["In my head / paper notes", "We don’t really track it"].includes(opt))) {
+    points.push("Ops & inventory tracking is unreliable or non-existent.");
+  }
+
   if (["40–50", "51–60", "61–70", "71+"].includes(a.weeklyHours)) points.push(`Working <strong>${a.weeklyHours}</strong> hours/week – you're the engine *and* the brakes.`);
 
   return points;
