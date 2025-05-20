@@ -6,7 +6,7 @@ export default function ScorecardBenchmarkDesktop({
   const scorePct   = Math.min(Math.max(score, 0), 100);
   const rawPercentile = 50 + ((score - benchmark) / (100 - benchmark)) * 50;
   const boundedPercentile = Math.max(1, Math.min(Math.round(rawPercentile), 99));
-
+  const benchmarkPct = Math.min(Math.max(benchmark, 0), 100);
 
   // map zone → Tailwind bg class
   const zoneBg = {
@@ -19,29 +19,40 @@ export default function ScorecardBenchmarkDesktop({
     <div className="w-full max-w-5xl mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-6 md:p-8 space-y-6">
       <h3 className="sm:mb-20 sm:text-6xl lg:text-5xl font-bold text-center">Dependency Score</h3>
 
-      {/* scale bar */}
-      <div className="relative w-full">
-        <div className="sm:h-5 flex w-full h-3 rounded-full overflow-hidden">
-          <div className="h-full bg-red-500"    style={{ width: "65%" }} />
-          <div className="h-full bg-yellow-400" style={{ width: "30%" }} />
-          <div className="h-full bg-green-500"  style={{ width: "25%" }} />
-        </div>
-
-        {/* marker */}
-        <div
-          className="absolute -top-1 flex flex-col items-center"
-          style={{ left: `${scorePct}%`, transform: "translateX(-50%)" }}
-        >
-          <div className="w-5 h-5 rounded-full bg-white border-2 border-orange-500 sm:w-8 sm:h-8 " />
-          <span className="text-[10px] font-semibold mt-1 sm:text-lg">
-            YOU
-          </span>
-        </div>
+    {/* scale bar */}
+    <div className="relative w-full">
+      <div className="sm:h-5 flex w-full h-3 rounded-full overflow-hidden">
+        <div className="h-full bg-red-500"    style={{ width: "65%" }} />
+        <div className="h-full bg-yellow-400" style={{ width: "30%" }} />
+        <div className="h-full bg-green-500"  style={{ width: "25%" }} />
       </div>
 
+      {/* YOU marker */}
+      <div
+        className="absolute -top-1 flex flex-col items-center"
+        style={{ left: `${scorePct}%`, transform: "translateX(-50%)" }}
+      >
+        <div className="w-8 h-8 rounded-full bg-orange-500 border-2 border-orange-500 " />
+        <span className="text-[10px] font-semibold mt-2 sm:text-lg">YOU</span>
+      </div>
+
+      {/* AVG marker */}
+      <div
+        className="absolute -top-1 flex flex-col items-center"
+        style={{ left: `${benchmarkPct}%`, transform: "translateX(-50%)" }}
+      >
+        <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-blue-500 " />
+        <span className="text-[10px] font-semibold mt-6 sm:text-lg text-white">AVG</span>
+      </div>
+    </div>
+
+
+
+
+
       {/* labels */}
-      <div className="flex justify-between text-xs text-gray-300 uppercase sm:text-lg sm:mt-10 sm:hidden">
-        <span>Full Dependency</span>
+      <div className="flex justify-between text-xs text-gray-300 uppercase sm:text-lg ">
+        <span>Dependency</span>
         <span>Freedom</span>
       </div>
 
