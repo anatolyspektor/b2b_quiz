@@ -79,7 +79,7 @@ export default function OptInDesktop(props) {
               <dl className="mt-12 space-y-12 text-gray-300">
                 {features.map((feature) => (
                   <div key={feature.name} className="relative pl-14">
-                    <dt className="block mb-2" style={{ color: primary }}>
+                    <dt className="block mb-2 text-orange-500" style={{ color: primary }}>
                       <feature.icon className="absolute top-0 left-0 h-10 w-10" />
                       <span className="text-xl font-semibold">{feature.name}</span>
                     </dt>
@@ -92,7 +92,7 @@ export default function OptInDesktop(props) {
 
           <div className="w-full px-4 py-20 flex flex-col items-center gap-8">
             <img
-              src="/report_test_1.jpg"
+              src="/frosted-report.jpg"
               width={2432}
               height={1442}
               className="w-full sm:w-full rounded-xl ring-1 shadow-xl ring-gray-400/10"
@@ -104,6 +104,7 @@ export default function OptInDesktop(props) {
                 onClick={handleClick}
                 className="w-full rounded-md px-8 py-6 text-xl sm:text-4xl font-semibold text-white shadow transition"
                 style={{ backgroundColor: "#FF5C5C" }}
+
               >
                 Take 2 Minute Quiz
               </button>
