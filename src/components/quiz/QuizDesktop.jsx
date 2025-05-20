@@ -207,7 +207,7 @@ export default function QuizDesktop({ onComplete }) {
         {currentQuestion.multi && (
           <div className="mt-10 text-center">
             <button
-              onClick={() => {
+            onClick={() => {
                 if (step + 1 === TOTAL_QUESTIONS) {
                   setFinalAnswers(answers);
                   setIsQuizFinished(true);
@@ -215,10 +215,15 @@ export default function QuizDesktop({ onComplete }) {
                   setStep((prev) => prev + 1);
                 }
               }}
-              className="text-[#F1FDED] text-xl font-medium hover:text-orange-300 transition"
-            >
-              Continue
-            </button>
+            disabled={
+              !Array.isArray(answers[currentQuestion.field]) ||
+              answers[currentQuestion.field].length === 0
+            }
+                        className="mt-6 w-full rounded-md px-6 py-5 text-white text-2xl font-semibold transition disabled:opacity-50"
+            style={{ backgroundColor: "#FF5C5C" }}
+          >
+             Next Question
+          </button>
           </div>
         )}
       </div>

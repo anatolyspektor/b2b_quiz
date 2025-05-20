@@ -201,7 +201,7 @@ export default function QuizMobile({ onComplete }) {
         {currentQuestion.multi && (
           <div className="mt-1 text-center">
             <button
-              onClick={() => {
+            onClick={() => {
                 if (step + 1 === TOTAL_QUESTIONS) {
                   setFinalAnswers(answers);
                   setIsQuizFinished(true);
@@ -209,10 +209,15 @@ export default function QuizMobile({ onComplete }) {
                   setStep((prev) => prev + 1);
                 }
               }}
-              className="text-[#F1FDED] text-6xl font-medium hover:text-orange-300 transition"
-            >
-              Next Question
-            </button>
+            disabled={
+              !Array.isArray(answers[currentQuestion.field]) ||
+              answers[currentQuestion.field].length === 0
+            }
+            className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition disabled:opacity-50"
+            style={{ backgroundColor: "#FF5C5C" }}
+          >
+             Next Question
+          </button>
 
           </div>
         )}
