@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       colors: {
         // Define your custom colors here
-        'brand-primary': '#40574b', // Example: a hex code
+        'brand-primary': '#0f373c', // Example: a hex code
         'brand-secondary': {
           DEFAULT: '#789abc', // Example: a hex code
           100: '#f0f0f0', // Example: a light shade

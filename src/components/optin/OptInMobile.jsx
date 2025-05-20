@@ -30,8 +30,8 @@ const features = [
 ];
 
 export default function OptInMobile({ onNext }) {
-  const primary = "#FF8257";
-  const background = "#275659";
+  const primary = "#FFFFFF";
+  const background = "#0f373c";
 
   const sessionId = getSessionId();
   const hasTracked = useRef(false);
@@ -63,7 +63,7 @@ export default function OptInMobile({ onNext }) {
     >
       <div className="text-center space-y-4">
         <h1 className="mx-5 text-center text-8xl font-bold text-white leading-snug">
-          WORKING <span className="text-[#FF8257]">60 HOUR WEEKS?</span>
+          WORKING <span className="text-orange-500">60 HOUR WEEKS?</span>
         </h1>
         <p className="text-5xl text-gray-200 mt-2">
           Find where the issue is in 2 minutes
@@ -79,9 +79,9 @@ export default function OptInMobile({ onNext }) {
       <div className="space-y-6 text-left w-full max-w-4xl">
         {features.map((feature) => (
           <div key={feature.name} className="flex items-start gap-4 mb-5">
-            <feature.icon className="text-2xl h-15 w-15 text-[#FF8257] mt-1" />
+            <feature.icon className="text-2xl h-15 w-15 text-orange-500 mt-1" />
             <div>
-              <p className="text-6xl font-semibold text-[#FF8257] mb-5">
+              <p className="text-6xl font-semibold text-orange-500 mb-5">
                 {feature.name}
               </p>
               <p className="text-gray-200 text-4xl text-left">{feature.description}</p>
@@ -92,8 +92,7 @@ export default function OptInMobile({ onNext }) {
 
       <button
         onClick={handleClick}
-        className="w-full mt-5 max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition"
-        style={{ backgroundColor: "#FF5C5C" }}
+        className="w-full mt-5 max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition bg-red-600"
       >
         Take 2 Minute Quiz
       </button>

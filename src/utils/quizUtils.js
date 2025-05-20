@@ -23,13 +23,18 @@ export const rangeMidpoint = (label) => {
   return parseInt(sanitized.match(/\d+/)?.[0] || "0");
 };
 
-export const zoneLabel = (score) => {
-  if (score > 30) return { zone: "RED", color: "bg-red-600" };
-  if (score > 15) return { zone: "YELLOW", color: "bg-yellow-400 text-gray-900" };
-  return { zone: "GREEN", color: "bg-green-500" };
-};
+  export const zoneLabel = (score) => {
+    if (score >= 80) return { zone: "GREEN", color: "bg-green-500" };
+    if (score >= 60) return { zone: "YELLOW", color: "bg-yellow-400 text-gray-900" };
+    return { zone: "RED", color: "bg-red-600" };
+  };
 
-export const moneyLost = (hrs) => hrs * 250;
+
+export const moneyLost = (workHrs, revenueLabel, hourlyRate = 250) => {
+  const benchmark = getBenchmarkHours(revenueLabel);
+  const extraHours = Math.max(workHrs - benchmark, 0);
+  return extraHours * hourlyRate;
+};
 
 export const getChokePoints = (a) => {
   const points = [];
@@ -49,7 +54,7 @@ export const getChokePoints = (a) => {
     points.push("Ops & inventory tracking is unreliable or non-existent.");
   }
 
-  if (["40–50", "51–60", "61–70", "71+"].includes(a.weeklyHours)) points.push(`Working <strong>${a.weeklyHours}</strong> hours/week – you're the engine *and* the brakes.`);
+  if (["51–60", "61–70", "71+"].includes(a.weeklyHours)) points.push(`Working <strong>${a.weeklyHours}</strong> hours/week – you're the engine *and* the brakes.`);
 
   return points;
 };
@@ -86,7 +91,7 @@ export const generateScorecard = (answers) => {
     p.replace(/<\/?[^>]+(>|$)/g, "")
   );
   const { zone, color } = zoneLabel(score);
-  const bleedPerWeek = moneyLost(workHrs);
+  const bleedPerWeek = moneyLost(workHrs,answers.revenue);
 
   return {
     score,
@@ -98,4 +103,25 @@ export const generateScorecard = (answers) => {
     chokePointsHTML: chokePoints,   // for frontend
   };
 };
+
+export const getBenchmarkHours = (revenueLabel) => {
+  switch (revenueLabel) {
+    case "Less than $1M":
+      return 40;
+    case "$1M–$3M":
+      return 40;
+    case "$3M–$5M":
+      return 40;
+    case "$5M–$10M":
+      return 35;
+    case "$10M–$25M":
+      return 30;
+    case "$25M–$100M":
+    case "$100M+":
+      return 40;
+    default:
+      return 40; // fallback for unknown values
+  }
+};
+
 
