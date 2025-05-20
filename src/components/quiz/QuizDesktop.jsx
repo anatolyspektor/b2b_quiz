@@ -62,7 +62,7 @@ export default function QuizDesktop({ onComplete }) {
 
   const handleFinalSubmit = async () => {
     if (name && isValidEmail(email)) {
-      await saveCustomer({ name, email, sessionId, device: "desktop" });
+      await saveCustomer({ name, email, sessionId, device: "desktop", answers });
 
       trackEvent({
         event: "quiz_complete",
@@ -73,7 +73,7 @@ export default function QuizDesktop({ onComplete }) {
 
       onComplete({ ...finalAnswers, name, email });
 
-      sendSlackEmailAdded({session_id: sessionId,name,email});
+      sendSlackEmailAdded({session_id: sessionId,name,email, answers});
 
     }
   };

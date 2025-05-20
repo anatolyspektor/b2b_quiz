@@ -62,7 +62,7 @@ export default function QuizMobile({ onComplete }) {
 
   const handleFinalSubmit = async () => {
     if (name && isValidEmail(email)) {
-      await saveCustomer({ name, email, sessionId, device: "desktop" });
+      await saveCustomer({ name, email, sessionId, device: "mobile", answers });
 
       trackEvent({
         event: "quiz_complete",
@@ -72,7 +72,7 @@ export default function QuizMobile({ onComplete }) {
       });
 
       onComplete({ ...finalAnswers, name, email });
-      sendSlackEmailAdded({session_id: sessionId,name,email});
+      sendSlackEmailAdded({session_id: sessionId,name,email,answers});
     }
   };
 
