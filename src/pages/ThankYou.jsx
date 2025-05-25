@@ -41,7 +41,7 @@ export default function ThankYou() {
         }
       ])
 
-      trackFbEvent('track', 'Schedule', {
+      trackFbEvent('Schedule', {
         content_name: 'Clarity Call',
       });
 

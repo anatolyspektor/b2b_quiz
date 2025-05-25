@@ -57,7 +57,7 @@ export default function QuizDesktop({ onComplete }) {
         answer: value,
     },
   });
-  trackFbEvent('track', 'AnswerSelected', {
+  trackFbEvent('AnswerSelected', {
       question: currentQuestion?.question,
       answer: value
     });
@@ -105,7 +105,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       metadata: answers,
     });
 
-    trackFbEvent('track', 'Lead', {
+    trackFbEvent('Lead', {
       content_name: '2 Minute Quiz',
       email: userEmail || '', // optional, hashed server-side by Meta if Conversion API used
     });
