@@ -41,9 +41,6 @@ export default function ThankYou() {
         }
       ])
 
-      trackFbEvent('Schedule', {
-        content_name: 'Clarity Call',
-      });
 
 
       if (error) {
@@ -53,6 +50,10 @@ export default function ThankYou() {
         sendSlackCallBooked({ session_id, test_name, variant, device, metadata })
       }
     }
+
+    trackFbEvent('Schedule', {
+      content_name: 'Clarity Call',
+    });
 
     trackCallBooked()
   }, [search])
