@@ -2,11 +2,23 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 serve(async (req) => {
+    if (req.method === "OPTIONS") {
+    return new Response("OK", {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
+      },
+    })
+  }
+
   const body = await req.json();
   const { event_name, email, session_id, timestamp, event_id } = body;
 
+
   const response = await fetch(
-    Deno.env.get("VITE_FB_TRACKING_URL"),
+    Deno.env.get("FB_TRACKING_URL"),
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,15 +36,20 @@ serve(async (req) => {
             action_source: "website",
           },
         ],
-        access_token: Deno.env.get("VITE_FB_TRACKING_TOKEN"),
+        access_token: Deno.env.get("FB_TRACKING_TOKEN"),
       }),
     }
   );
 
   const resJson = await response.json();
-  return new Response(JSON.stringify(resJson), {
-    headers: { "Content-Type": "application/json" },
-  });
+     return new Response(JSON.stringify(resJson), {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", // or use your domain instead of "*"
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+      },
+    });
 });
 
 function hashEmail(email: string) {

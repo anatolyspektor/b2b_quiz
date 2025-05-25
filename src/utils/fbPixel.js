@@ -16,13 +16,17 @@ export const trackFbEvent = (eventName, params = {}) => {
 
     fetch(webhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${import.meta.env.VITE_FB_SECRET_TOKEN}`, // NEW LINE
+      },
       body: JSON.stringify({
         event_name: eventName,
         event_id: eventID,
         ...params,
       }),
     });
+
   } catch (err) {
     console.warn(`❌ FB Pixel + API tracking failed: ${eventName}`, err);
   }
