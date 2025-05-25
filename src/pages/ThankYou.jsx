@@ -48,12 +48,12 @@ export default function ThankYou() {
       } else {
         localStorage.setItem("call_booked_tracked", "true")
         sendSlackCallBooked({ session_id, test_name, variant, device, metadata })
+        trackFbEvent('Schedule', {
+          content_name: 'Clarity Call',
+          email,
+        });
       }
     }
-
-    trackFbEvent('Schedule', {
-      content_name: 'Clarity Call',
-    });
 
     trackCallBooked()
   }, [search])
