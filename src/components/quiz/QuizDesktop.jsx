@@ -54,6 +54,12 @@ export default function QuizDesktop({ onComplete }) {
         question: currentQuestion?.question,
         answer: value,
     },
+
+
+    fbq('track', 'AnswerSelected', {
+      question: currentQuestion?.question,
+      answer: value
+    });
 });
   };
 
