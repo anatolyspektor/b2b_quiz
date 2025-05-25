@@ -50,7 +50,7 @@ export default function OptInMobile({ onNext }) {
   }, []);
 
   const handleClick = () => {
-    trackFbEvent('trackCustom', 'OptInClicked');
+    trackFbEvent('OptInClicked');
     trackEvent({
       event: "optin_click",
       sessionId,

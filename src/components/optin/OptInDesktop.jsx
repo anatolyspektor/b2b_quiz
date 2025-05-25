@@ -56,7 +56,7 @@ export default function OptInDesktop(props) {
       sessionId,
       device: "desktop",
     });
-    trackFbEvent('trackCustom', 'OptInClicked');
+    trackFbEvent('OptInClicked');
     props.onNext();
   };
 
