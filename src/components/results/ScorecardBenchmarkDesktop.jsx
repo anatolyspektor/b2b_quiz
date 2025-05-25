@@ -22,9 +22,9 @@ export default function ScorecardBenchmarkDesktop({
     {/* scale bar */}
     <div className="relative w-full">
       <div className="sm:h-5 flex w-full h-3 rounded-full overflow-hidden">
-        <div className="h-full bg-red-500"    style={{ width: "65%" }} />
-        <div className="h-full bg-yellow-400" style={{ width: "30%" }} />
-        <div className="h-full bg-green-500"  style={{ width: "25%" }} />
+        <div className="h-full bg-red-500"    style={{ width: "25%" }} />
+        <div className="h-full bg-yellow-400" style={{ width: "55%" }} />
+        <div className="h-full bg-green-500"  style={{ width: "20%" }} />
       </div>
 
       {/* YOU marker */}

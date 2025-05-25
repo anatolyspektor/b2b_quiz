@@ -25,7 +25,7 @@ export const rangeMidpoint = (label) => {
 
   export const zoneLabel = (score) => {
     if (score >= 80) return { zone: "GREEN", color: "bg-green-500" };
-    if (score >= 60) return { zone: "YELLOW", color: "bg-yellow-400 text-gray-900" };
+    if (score >= 30) return { zone: "YELLOW", color: "bg-yellow-400 text-gray-900" };
     return { zone: "RED", color: "bg-red-600" };
   };
 
