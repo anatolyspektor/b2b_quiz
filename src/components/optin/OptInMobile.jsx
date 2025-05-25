@@ -44,6 +44,7 @@ export default function OptInMobile({ onNext }) {
         sessionId,
         device:  "mobile",
       });
+      trackFbEvent("track","PageView");
       hasTracked.current = true;
     }
   }, []);

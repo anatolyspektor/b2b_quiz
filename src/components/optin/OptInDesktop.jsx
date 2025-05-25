@@ -45,6 +45,7 @@ export default function OptInDesktop(props) {
         sessionId,
         device:  "desktop",
       });
+      trackFbEvent("track","PageView");
       hasTracked.current = true;
     }
   }, []);
