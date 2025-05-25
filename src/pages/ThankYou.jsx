@@ -40,6 +40,11 @@ export default function ThankYou() {
         }
       ])
 
+      fbq('track', 'Schedule', {
+        content_name: 'Clarity Call',
+      });
+
+
       if (error) {
         console.error("❌ Failed to track call_booked event:", error)
       } else {

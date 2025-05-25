@@ -54,6 +54,7 @@ export default function OptInDesktop(props) {
       sessionId,
       device: "desktop",
     });
+    fbq('trackCustom', 'OptInClicked');
     props.onNext();
   };
 

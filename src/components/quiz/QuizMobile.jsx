@@ -98,6 +98,11 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       device: "mobile",
       metadata: answers,
     });
+
+    fbq('track', 'Lead', {
+      content_name: '2 Minute Quiz',
+      email: userEmail || '', // optional, hashed server-side by Meta if Conversion API used
+    });
   }
 };
 

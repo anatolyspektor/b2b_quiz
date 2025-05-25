@@ -48,6 +48,7 @@ export default function OptInMobile({ onNext }) {
   }, []);
 
   const handleClick = () => {
+    fbq('trackCustom', 'OptInClicked');
     trackEvent({
       event: "optin_click",
       sessionId,
