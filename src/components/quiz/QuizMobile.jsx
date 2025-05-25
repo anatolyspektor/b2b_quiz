@@ -54,12 +54,12 @@ export default function QuizMobile({ onComplete }) {
         question: currentQuestion?.question,
         answer: value,
     },
-
-    fbq('track', 'AnswerSelected', {
-      question: currentQuestion?.question,
-      answer: value
-    });
-});
+  });
+    
+  fbq('track', 'AnswerSelected', {
+    question: currentQuestion?.question,
+    answer: value
+  });
   };
 
   const handleBack = () => {
