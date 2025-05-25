@@ -7,10 +7,10 @@
   <!-- Meta Description (for SEO) -->
   <meta name="description" content="Take the 2-minute ScaleCheck quiz to identify the #1 reason your B2B business isn't scaling — and get a custom action plan." />
 
-  <!-- Meta Keywords (less important but still fine) -->
+  <!-- Meta Keywords -->
   <meta name="keywords" content="scale business, B2B quiz, operations bottlenecks, business growth, founder quiz, team performance, process optimization" />
 
-  <!-- Open Graph (for social media preview) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="ScaleCheck — Diagnose Why Your Business Is Stuck" />
   <meta property="og:description" content="Take the 2-minute quiz to uncover bottlenecks and unlock scalable growth." />
   <meta property="og:image" content="/social-preview.png" />
@@ -27,7 +27,7 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
   <!-- Meta Pixel Code -->
-<script>
+  <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -38,15 +38,19 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '652874321051657');
     fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=652874321051657&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  </script>
+  <!-- End Meta Pixel Code -->
 </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<body>
+  <div id="root"></div>
+
+  <!-- Meta Pixel NoScript (must be in body) -->
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=652874321051657&ev=PageView&noscript=1" />
+  </noscript>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
