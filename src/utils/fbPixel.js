@@ -1,5 +1,7 @@
 export const trackFbEvent = (eventName, params = {}) => {
-  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+  const isProd = import.meta.env.MODE === "production";
+  if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
+
 
   const eventID = crypto.randomUUID();
 
