@@ -18,7 +18,7 @@ export const trackFbEvent = (eventName, params = {}) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${import.meta.env.VITE_FB_TRACKING_TOKEN}`, // NEW LINE
+        "Authorization": `Bearer ${import.meta.env.VITE_FB_SECRET_TOKEN}`, // NEW LINE
       },
       body: JSON.stringify({
         event_name: eventName,
