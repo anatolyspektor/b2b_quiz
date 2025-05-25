@@ -1,21 +1,28 @@
 export const trackFbEvent = (eventName, params = {}) => {
-  const isProd = import.meta.env.MODE === "production";
-  const isAdminRoute = window.location.pathname.includes("funnel-stats");
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
 
-  if (!isProd || isAdminRoute) return;
-
-  if (typeof window.fbq !== "function") {
-    setTimeout(() => {
-      if (typeof window.fbq === "function") {
-        window.fbq("track", eventName, params);
-      }
-    }, 1000); // wait 1 second
-    return;
-  }
+  const eventID = crypto.randomUUID();
 
   try {
-    window.fbq("track", eventName, params);
+    // 1. Send client-side Pixel
+    window.fbq("track", eventName, {
+      ...params,
+      eventID,
+    });
+
+    const webhookUrl = import.meta.env.VITE_FB_WEBHOOK_URL;
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event_name: eventName,
+        event_id: eventID,
+        ...params,
+      }),
+    });
   } catch (err) {
-    console.warn(`❌ FB Pixel event failed: ${eventName}`, err);
+    console.warn(`❌ FB Pixel + API tracking failed: ${eventName}`, err);
   }
 };
+
