@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { sendSlackCallBooked } from "@/utils/slack"
+import { trackFbEvent } from "@/utils/fbPixel";
 
 export default function ThankYou() {
   const { search } = useLocation()
@@ -40,7 +41,7 @@ export default function ThankYou() {
         }
       ])
 
-      fbq('track', 'Schedule', {
+      trackFbEvent('track', 'Schedule', {
         content_name: 'Clarity Call',
       });
 

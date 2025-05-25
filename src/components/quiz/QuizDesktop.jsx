@@ -6,6 +6,8 @@ import { trackEvent } from "../../utils/trackEvent";
 import { getSessionId } from "../../utils/getSessionId";
 import { sendSlackEmailAdded } from "@/utils/slack"
 import { generateScorecard, getChokePoints} from "@/utils/quizUtils";
+import { trackFbEvent } from "@/utils/fbPixel";
+
 
 export default function QuizDesktop({ onComplete }) {
   const [answers, setAnswers] = useState({});
@@ -55,7 +57,7 @@ export default function QuizDesktop({ onComplete }) {
         answer: value,
     },
   });
-  fbq('track', 'AnswerSelected', {
+  trackFbEvent('track', 'AnswerSelected', {
       question: currentQuestion?.question,
       answer: value
     });
@@ -103,7 +105,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       metadata: answers,
     });
 
-    fbq('track', 'Lead', {
+    trackFbEvent('track', 'Lead', {
       content_name: '2 Minute Quiz',
       email: userEmail || '', // optional, hashed server-side by Meta if Conversion API used
     });

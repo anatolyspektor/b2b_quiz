@@ -7,6 +7,7 @@ import {
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
 import { getABVariant } from "@/utils/abTest";
+import { trackFbEvent } from "@/utils/fbPixel";
 
 const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
@@ -54,7 +55,7 @@ export default function OptInDesktop(props) {
       sessionId,
       device: "desktop",
     });
-    fbq('trackCustom', 'OptInClicked');
+    trackFbEvent('trackCustom', 'OptInClicked');
     props.onNext();
   };
 

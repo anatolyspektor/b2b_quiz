@@ -8,6 +8,7 @@ import {
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
 import { getABVariant } from "@/utils/abTest";
+import { trackFbEvent } from "@/utils/fbPixel";
 
 const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
@@ -48,7 +49,7 @@ export default function OptInMobile({ onNext }) {
   }, []);
 
   const handleClick = () => {
-    fbq('trackCustom', 'OptInClicked');
+    trackFbEvent('trackCustom', 'OptInClicked');
     trackEvent({
       event: "optin_click",
       sessionId,
