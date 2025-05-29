@@ -57,7 +57,7 @@ export default function Results({
                   <div className="w-10 h-10 rounded-full bg-white text-[#0f373c] font-bold flex items-center justify-center text-lg">
                     A
                   </div>
-                  <span className="text-xl text-gray-300">Albert, $4.2M OEM</span>
+                  <span className="text-2xl text-gray-300">Albert, $4.2M OEM</span>
                 </div>
               </div>
             </div>
@@ -71,17 +71,19 @@ export default function Results({
               )}&email=${encodeURIComponent(email)}`;
               window.location.href = url;
             }}
-            className="w-full rounded-lg px-6 py-5 text-5xl font-bold text-white shadow bg-orange-500 hover:bg-[#ea580c]"
+            className="mt-5 w-full rounded-lg px-6 py-5 text-6xl font-bold text-white shadow bg-orange-500 hover:bg-[#ea580c]"
           >
             Help Me Win Back My Time
           </button>
 
           {/* Urgency */}
-          <p className="text-lg text-gray-500">
+          <p className="text-2xl text-gray-500">
             Only 4 free calls left this week.
           </p>
         </div>
       )}
+      <div className="mt-30"></div>
     </div>
+
   );
 }
