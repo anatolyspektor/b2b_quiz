@@ -2,7 +2,7 @@ import React from "react";
 import { getBenchmarkHours } from "@/utils/quizUtils";
 
 export default function LeverageCalculatorDesktop({ revenue, workHrs, hourlyRate = 250 }) {
-  const benchmark = getBenchmarkHours(revenue);
+  const benchmark = 30;
   const extraHours = Math.max(workHrs - benchmark, 0);
   const bleed = extraHours * hourlyRate;
 

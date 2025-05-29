@@ -2,42 +2,41 @@ import React from "react";
 import { getBenchmarkHours } from "@/utils/quizUtils";
 
 export default function LeverageCalculatorMobile({ revenue, workHrs, hourlyRate = 250 }) {
-  const benchmark = getBenchmarkHours(revenue);
+  const benchmark = 30;
   const extraHours = Math.max(workHrs - benchmark, 0);
   const bleed = extraHours * hourlyRate;
 
-
-
   return (
-    <div className="mb-15w-full w-full mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-6 md:p-8 space-y-6">
-      <h3 className="text-7xl font-bold text-center mb-20">Leverage</h3>
+    <div className="w-full max-w-5xl mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-8 space-y-10">
+      <h3 className="text-6xl font-bold text-center">What It's Costing You</h3>
 
-      <div className="flex justify-around items-center text-xl font-medium sm:text-3xl mb-15">
+      {/* Premium stacked layout */}
+      <div className="flex flex-col items-center space-y-6">
         <div className="text-center">
-          <p className="text-gray-300 text-3xl">You Work</p>
-          <p className="text-6xl  font-bold">{workHrs} hrs</p>
+          <p className="text-gray-400 text-4xl mb-1">You</p>
+          <p className="font-bold text-7xl">{workHrs}h</p>
         </div>
         <div className="text-center">
-          <p className="text-gray-300 text-3xl">Benchmark</p>
-          <p className="text-6xl  font-bold">{benchmark} hrs</p>
+          <p className="text-gray-400 text-4xl mb-1">Benchmark</p>
+          <p className="font-bold text-7xl">{benchmark}h</p>
         </div>
         <div className="text-center">
-          <p className="text-gray-300 text-3xl">Overwork</p>
-          <p className="text-7xl  font-bold text-red-500">+{extraHours} hrs</p>
+          <p className="text-gray-400 text-4xl mb-1">Over</p>
+          <p className="font-bold text-red-500 text-7xl">+{extraHours}h</p>
         </div>
       </div>
 
       {extraHours > 0 ? (
-        <div className=" text-white text-center p-4 rounded-lg text-4xl font-semibold">
-          That’s <span className="text-red-500 text-6xl">
-          ${bleed}
-          </span> per week
-          <br className="hidden sm:block" />
-          you could be reinvesting into growth.
+        <div className="text-center mt-16 space-y-2">
+          <p className="text-3xl font-semibold">You’re burning</p>
+          <p className="text-red-500 text-6xl font-bold">
+            ${bleed.toLocaleString()}
+          </p>
+          <p className="text-gray-300 text-3xl">a week doing what others should.</p>
         </div>
       ) : (
-        <div className="bg-green-700/20 text-green-200 text-center p-4 rounded-lg text-4xl font-semibold">
-          You're working at or below your benchmark — nice work creating space for leverage.
+        <div className="text-center text-green-300 text-2xl font-semibold">
+          You're within benchmark. Well done.
         </div>
       )}
     </div>

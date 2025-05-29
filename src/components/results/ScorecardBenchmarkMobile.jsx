@@ -3,74 +3,87 @@ export default function ScorecardBenchmarkMobile({
   zone = "",         // "RED" | "YELLOW" | "GREEN"
   benchmark = 64,
 }) {
-  const scorePct   = Math.min(Math.max(score, 0), 100);
   const rawPercentile = 50 + ((score - benchmark) / (100 - benchmark)) * 50;
   const boundedPercentile = Math.max(1, Math.min(Math.round(rawPercentile), 99));
-  const benchmarkPct = Math.min(Math.max(benchmark, 0), 100);
 
-  // map zone → Tailwind bg class
-  const zoneBg = {
-    RED:    "bg-red-500",
+  const zoneColors = {
+    RED: "bg-red-500",
     YELLOW: "bg-yellow-400",
-    GREEN:  "bg-green-500",
-  }[zone] || "bg-gray-500";
+    GREEN: "bg-green-500",
+  };
+
+  const textColor = {
+    RED: "text-red-500",
+    YELLOW: "text-yellow-400",
+    GREEN: "text-green-500",
+  };
 
   return (
-    <div className="w-full max-w-5xl mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-6 md:p-8 space-y-6">
-      <h3 className="mb-30 text-7xl  font-bold text-center">Dependency Score</h3>
+    <div className="w-full max-w-5xl mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-8 space-y-5">
+      <h3 className="text-6xl font-bold text-center">Dependency Score</h3>
 
-    {/* scale bar */}
-    <div className="relative w-full">
-      <div className="h-10 flex w-full rounded-full overflow-hidden">
-        <div className="h-full bg-red-500"    style={{ width: "25%" }} />
-        <div className="h-full bg-yellow-400" style={{ width: "55%" }} />
-        <div className="h-full bg-green-500"  style={{ width: "20%" }} />
+      <div className="flex flex-col items-center gap-10">
+        {/* Circle */}
+        <div className="relative w-56 h-56">
+          <svg viewBox="0 0 42 42" className="w-full h-full rotate-[-90deg]">
+            {/* RED: 0–40% */}
+            <circle
+              r="16"
+              cx="21"
+              cy="21"
+              fill="transparent"
+              stroke="red"
+              strokeWidth="4"
+              strokeDasharray="40 60"
+              strokeDashoffset="0"
+              strokeLinecap="butt"
+            />
+            {/* YELLOW: 40–75% (35%) */}
+            <circle
+              r="16"
+              cx="21"
+              cy="21"
+              fill="transparent"
+              stroke="#facc15"
+              strokeWidth="4"
+              strokeDasharray="35 65"
+              strokeDashoffset="-40"
+              strokeLinecap="butt"
+            />
+            {/* GREEN: 75–100% (25%) */}
+            <circle
+              r="16"
+              cx="21"
+              cy="21"
+              fill="transparent"
+              stroke="green"
+              strokeWidth="4"
+              strokeDasharray="25 75"
+              strokeDashoffset="-75"
+              strokeLinecap="butt"
+            />
+          </svg>
+
+
+          {/* Score inside */}
+          <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full flex items-center justify-center text-[#0f373c] text-5xl font-bold ${zoneColors[zone]}`}>
+            {score}
+          </div>
+        </div>
+
+        {/* Text */}
+        <div className="text-center space-y-6 max-w-md">
+          <p className="text-5xl font-medium leading-snug">
+            You're <span className="font-bold">{boundedPercentile >= 50 ? "above" : "below"}</span>{" "}
+            <span className={textColor[zone] + " font-bold"}>{boundedPercentile}%</span> of founders.
+          </p>
+          {(zone === "RED" || zone === "YELLOW") && (
+            <p className="text-3xl text-gray-300">
+              That’s why everything still runs through you.
+            </p>
+          )}
+        </div>
       </div>
-
-      {/* YOU marker */}
-      <div
-        className="absolute -top-1 flex flex-col items-center"
-        style={{ left: `${scorePct}%`, transform: "translateX(-50%)" }}
-      >
-        <div className="w-12 h-12 rounded-full bg-orange-500 border-2 border-orange-500" />
-        <span className="font-semibold mt-1 text-3xl">YOU</span>
-      </div>
-
-      {/* AVG marker */}
-      <div
-        className="absolute -top-1 flex flex-col items-center"
-        style={{ left: `${benchmarkPct}%`, transform: "translateX(-50%)" }}
-      >
-        <div className="w-12 h-12 rounded-full bg-blue-500 border-2 border-blue-500" />
-        <span className="font-semibold mt-8 text-3xl text-white">AVG</span>
-      </div>
-    </div>
-
-
-
-      {/* copy */}
-      <p className=" text-center flex flex-wrap justify-center gap-2 sm:mt-30 text-5xl/20">
-        You scored
-        {/* score pill */}
-        <span className={`inline-flex items-center justify-center w-20 h-20 rounded-full  ${zoneBg} text-[#0f373c] font-bold `}>
-          {score}
-        </span>
-        , which puts you in the
-        {/* zone badge */}
-        <span className={`px-3 py-2  rounded text-5xl/20 font-bold  ${zoneBg}`}>
-          {zone}
-        </span>
-        zone.
-      </p>
-
-      <p className="text-center text-5xl mt-10">
-        That’s <strong>{boundedPercentile >= 50 ? "higher" : "lower"}</strong> than{" "}
-        <strong>{boundedPercentile}%</strong> of founders we’ve assessed.
-      </p>
-
-    <p className=" text-gray-300 text-center text-4xl mt-15">
-      Most founders score around {benchmark}. Target for true freedom is 85+.
-    </p>
     </div>
   );
 }
