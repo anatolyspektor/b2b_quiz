@@ -1,4 +1,8 @@
 export const sendSlackCallBooked = async ({ session_id, test_name, variant, device, metadata = {} }) => {
+    // Only production
+  const isProd = import.meta.env.MODE === "production";
+  if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
+
   const webhookUrl = import.meta.env.VITE_SLACK_WEBHOOK_URL;
 
   const {
@@ -45,6 +49,11 @@ export const sendSlackEmailAdded = async ({
   bleedPerWeek,
   chokePoints = [],
 }) => {
+
+    // Only production
+  const isProd = import.meta.env.MODE === "production";
+  if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
+  
   const webhookUrl = import.meta.env.VITE_SLACK_WEBHOOK_URL;
 
   const fields = Object.entries(answers)

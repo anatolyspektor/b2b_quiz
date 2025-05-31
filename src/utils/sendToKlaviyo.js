@@ -1,4 +1,8 @@
 export async function sendToKlaviyo({ name, email, score, zone, color, workHrs, bleedPerWeek, revenue }) {
+  // Only production
+  const isProd = import.meta.env.MODE === "production";
+  if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
+
   const webhookUrl = import.meta.env.VITE_SEND_TO_KLAVYIO;
 
   try {
@@ -27,7 +31,7 @@ export async function sendToKlaviyo({ name, email, score, zone, color, workHrs, 
 
 export async function markKlaviyoCallBooked(email) {
   const webhookUrl = import.meta.env.VITE_KLAVYIO_SET_CALL_BOOKED;
-  
+
   try {
     const res = await fetch("https://your-project-id.supabase.co/functions/v1/klaviyo-set-call-booked", {
       method: "POST",

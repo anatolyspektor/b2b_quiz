@@ -20,6 +20,10 @@ export const trackEvent = async ({
   test_name = localStorage.getItem("test_name") || '',
   metadata = {}
 }) => {
+  // Only production
+  const isProd = import.meta.env.MODE === "production";
+  if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
+
   const referer = document.referrer || window.location.href
   const utmKey = `utm_saved`
   const trackKey = `tracked_${event}_${sessionId}`
