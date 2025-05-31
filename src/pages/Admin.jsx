@@ -6,17 +6,16 @@ export default function Admin() {
   const [metrics, setMetrics] = useState(null)
   const [loading, setLoading] = useState(true)
 
-   useEffect(() => {
+  useEffect(() => {
     loadData()
   }, [])
 
   const loadData = async () => {
-      setLoading(true)
-      const data = await getMetrics()
-      setMetrics(data)
-      setLoading(false)
+    setLoading(true)
+    const data = await getMetrics()
+    setMetrics(data)
+    setLoading(false)
   }
-
 
   const handleResetStats = async () => {
     const confirmed = window.confirm("Are you sure you want to delete all event data? This cannot be undone.")
@@ -34,24 +33,22 @@ export default function Admin() {
     alert("✅ Stats have been reset.")
   }
 
-
-
   if (loading || !metrics) return <div className="p-8 text-lg">Loading...</div>
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 p-8 space-y-10">
-    <div className="flex items-center justify-between">
-      <div>
-        <h1 className="text-2xl font-bold">📊 2 Minute Quiz Dashboard</h1>
-        <p className="text-sm text-gray-500">Live view of quiz engagement stats</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">📊 2 Minute Quiz Dashboard</h1>
+          <p className="text-sm text-gray-500">Live view of quiz engagement stats</p>
+        </div>
+        <button
+          onClick={handleResetStats}
+          className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 text-sm"
+        >
+          Reset Stats
+        </button>
       </div>
-      <button
-        onClick={handleResetStats}
-        className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 text-sm"
-      >
-        Reset Stats
-      </button>
-    </div>
 
       <div className="grid grid-cols-4 gap-6">
         <Stat label="Page Views" value={metrics.impressions} />
@@ -74,7 +71,6 @@ export default function Admin() {
               : undefined
           }
         />
-
       </div>
 
       <Section title="🧩 Quiz Steps Drop Off">
@@ -101,46 +97,52 @@ export default function Admin() {
       </Section>
 
       <Section title="📈 AD Campaigns A/B Tested">
-      {(metrics.utmFunnelsDetailed || []).map(({ campaign, variants }) => (
-        <div key={campaign} className="border rounded-lg p-4 bg-white shadow-sm space-y-4">
-          <div className="font-semibold text-lg">{campaign || "No Ad"}</div>
+        {(metrics.utmFunnelsDetailed || []).map(({ campaign, mediums }) => (
+          <div key={`campaign_${campaign}`} className="space-y-6">
+            <h3 className="text-xl font-bold text-gray-800">{campaign}</h3>
 
-          {variants.length === 0 ? (
-            <div className="text-sm text-gray-500 italic">No data for this campaign</div>
-          ) : (
-            <div className="grid grid-cols-2 gap-4">
-              {variants
-                .sort((a, b) => a.variant.localeCompare(b.variant))
-                .map(v => (
-                  <div key={v.variant} className="border rounded-lg p-4 bg-gray-50 space-y-2">
-                    <div className="text-lg font-semibold text-center">Variant {v.variant}</div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <MiniStat
-                        label="Views"
-                        value={v.impressions}
-                        secondary={
-                          v.impressions > 0
-                            ? Math.round(
-                                (v.impressions /
-                                  variants.reduce((sum, x) => sum + x.impressions, 0)) * 100
-                              )
-                            : 0
-                        }
-                        secondaryClass="text-yellow-500"
-                      />
-                      <MiniStat
-                        label="Clicks"
-                        value={v.conversions}
-                        secondary={v.conversionRate}
-                        secondaryClass="text-green-600"
-                      />
+            {mediums.map(({ medium, contents }) => (
+              <div key={`medium_${campaign}_${medium}`} className="space-y-4 pl-4 border-l-2 border-blue-300">
+                <h4 className="text-lg font-semibold text-gray-800">Medium: {medium}</h4>
+
+                {contents.map(({ content, variants }) => (
+                  <div key={`content_${campaign}_${medium}_${content}`} className="space-y-2 pl-4 border-l border-gray-200">
+                    <h5 className="text-md font-semibold text-gray-800">Content: {content}</h5>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      {variants.map(v => (
+                        <div key={`variant_${campaign}_${medium}_${content}_${v.variant}`} className="border rounded-lg p-4 bg-gray-50 space-y-2">
+                          <div className="text-lg font-semibold text-center">Variant {v.variant}</div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <MiniStat
+                              label="Views"
+                              value={v.impressions}
+                              secondary={
+                                v.impressions > 0
+                                  ? Math.round(
+                                      (v.impressions /
+                                        variants.reduce((sum, x) => sum + x.impressions, 0)) * 100
+                                    )
+                                  : 0
+                              }
+                              secondaryClass="text-yellow-500"
+                            />
+                            <MiniStat
+                              label="Clicks"
+                              value={v.conversions}
+                              secondary={v.conversionRate}
+                              secondaryClass="text-green-600"
+                            />
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
-            </div>
-          )}
-        </div>
-      ))}
+              </div>
+            ))}
+          </div>
+        ))}
       </Section>
     </div>
   )

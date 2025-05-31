@@ -14,7 +14,6 @@ export const getMetrics = async () => {
   const completed = new Set(events.filter(e => e.event === "quiz_complete").map(e => e.session_id)).size
   const callsBooked = new Set(events.filter(e => e.event === "call_booked").map(e => e.session_id)).size
 
-
   // Devices
   const byDevice = Object.entries(
     events.reduce((acc, e) => {
@@ -35,38 +34,51 @@ export const getMetrics = async () => {
     }, {})
   ).map(([step, set]) => ({ event: step, count: set.size }))
 
-  // UTM Campaigns + Variants
-  const utmVariantMap = {}
+  // UTM Campaigns + Variants (nested structure)
+  const nestedUTMMap = {}
 
   events.forEach(e => {
-    const campaign = e.metadata?.utm?.campaign || "No UTM"
+    const utm = e.metadata?.utm || {}
+    const campaign = utm.campaign || "No UTM"
+    const medium = utm.medium || "No Medium"
+    const content = utm.content || "No Content"
     const variant = e.variant || "unknown"
     const session = e.session_id
 
-    utmVariantMap[campaign] = utmVariantMap[campaign] || {}
-    utmVariantMap[campaign][variant] = utmVariantMap[campaign][variant] || {
-      variant,
-      impressions: new Set(),
-      conversions: new Set(),
+    if (!nestedUTMMap[campaign]) nestedUTMMap[campaign] = {}
+    if (!nestedUTMMap[campaign][medium]) nestedUTMMap[campaign][medium] = {}
+    if (!nestedUTMMap[campaign][medium][content]) nestedUTMMap[campaign][medium][content] = {}
+    if (!nestedUTMMap[campaign][medium][content][variant]) {
+      nestedUTMMap[campaign][medium][content][variant] = {
+        variant,
+        impressions: new Set(),
+        conversions: new Set(),
+      }
     }
 
-    if (e.event === "optin_impression") utmVariantMap[campaign][variant].impressions.add(session)
-    if (e.event === "optin_click") utmVariantMap[campaign][variant].conversions.add(session)
+    if (e.event === "optin_impression") nestedUTMMap[campaign][medium][content][variant].impressions.add(session)
+    if (e.event === "optin_click") nestedUTMMap[campaign][medium][content][variant].conversions.add(session)
   })
 
-  const utmFunnelsDetailed = Object.entries(utmVariantMap).map(([campaign, variants]) => ({
+  const utmFunnelsDetailed = Object.entries(nestedUTMMap).map(([campaign, mediums]) => ({
     campaign,
-    variants: Object.values(variants).map(v => {
-      const impressions = v.impressions.size
-      const conversions = v.conversions.size
-      const conversionRate = impressions > 0 ? Math.round((conversions / impressions) * 100) : 0
-      return {
-        variant: v.variant,
-        impressions,
-        conversions,
-        conversionRate,
-      }
-    }),
+    mediums: Object.entries(mediums).map(([medium, contents]) => ({
+      medium,
+      contents: Object.entries(contents).map(([content, variants]) => ({
+        content,
+        variants: Object.values(variants).map(v => {
+          const impressions = v.impressions.size
+          const conversions = v.conversions.size
+          const conversionRate = impressions > 0 ? Math.round((conversions / impressions) * 100) : 0
+          return {
+            variant: v.variant,
+            impressions,
+            conversions,
+            conversionRate,
+          }
+        })
+      }))
+    }))
   }))
 
   // A/B Test Groups
@@ -117,10 +129,10 @@ export const getMetrics = async () => {
     impressions,
     clicks,
     completed,
-    callsBooked, // ✅ Add this line
+    callsBooked,
     byDevice,
     quizSteps,
     byVariantTest,
     utmFunnelsDetailed,
   }
-} 
+}
