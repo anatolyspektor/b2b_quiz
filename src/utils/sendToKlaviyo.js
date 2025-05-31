@@ -33,7 +33,7 @@ export async function markKlaviyoCallBooked(email) {
   const webhookUrl = import.meta.env.VITE_KLAVYIO_SET_CALL_BOOKED;
 
   try {
-    const res = await fetch("https://your-project-id.supabase.co/functions/v1/klaviyo-set-call-booked", {
+    const res = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
