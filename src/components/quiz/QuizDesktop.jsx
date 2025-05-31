@@ -7,6 +7,7 @@ import { getSessionId } from "../../utils/getSessionId";
 import { sendSlackEmailAdded } from "@/utils/slack"
 import { generateScorecard, getChokePoints} from "@/utils/quizUtils";
 import { trackFbEvent } from "@/utils/fbPixel";
+import { sendToKlaviyo } from "@/utils/sendToKlaviyo";
 
 
 export default function QuizDesktop({ onComplete }) {
@@ -70,6 +71,7 @@ export default function QuizDesktop({ onComplete }) {
 const handleFinalSubmit = async ({ sessionId, name, email }) => {
   if (name && isValidEmail(email)) {
     const scorecard = generateScorecard(answers);
+    const { score, zone, color, workHrs, bleedPerWeek } = scorecard;
     const chokePointsHTML = getChokePoints(answers);
 
     await saveCustomer({
@@ -88,6 +90,9 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       answers,
       ...scorecard,
     });
+    
+    sendToKlaviyo({ name, email, score, zone,  workHrs, bleedPerWeek, revenue: answers.revenue,   chokePoints: chokePointsHTML.join("\n") });
+
 
     onComplete({
       name,

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import { supabase } from "@/lib/supabase"
 import { sendSlackCallBooked } from "@/utils/slack"
 import { trackFbEvent } from "@/utils/fbPixel";
+import { markKlaviyoCallBooked } from "@/utils/sendToKlaviyo";
 
 export default function ThankYou() {
   const { search } = useLocation()
@@ -48,6 +49,7 @@ export default function ThankYou() {
       } else {
         localStorage.setItem("call_booked_tracked", "true")
         sendSlackCallBooked({ session_id, test_name, variant, device, metadata })
+        markKlaviyoCallBooked(email);
         trackFbEvent('Schedule', {
           content_name: 'Clarity Call',
           email,

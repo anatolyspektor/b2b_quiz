@@ -1,0 +1,2 @@
+[functions.klaviyo-set-call-booked]
+verify_jwt = false
