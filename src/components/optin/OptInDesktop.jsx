@@ -6,26 +6,24 @@ import {
 } from "@heroicons/react/20/solid";
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
-import { getABVariant } from "@/utils/abTest";
 import { trackFbEvent } from "@/utils/fbPixel";
 
-const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
 
 const features = [
   {
-    name: "Doing your team’s job?",
-    description: "Find out where things break when you're not there.",
+    name: "Answer Few Questions",
+    description: "This quick 2-minute quiz reveals what’s really holding you back.",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Tired and burned out?",
-    description: "See what’s wasting your time and messing up your team.",
+    name: "Get Personalized Scorecard",
+    description: "We’ll break down exactly where your business depends on you — and how to fix it.",
     icon: LockClosedIcon,
   },
   {
-    name: "Want your freedom back?",
-    description: "This 2-minute quiz shows what’s keeping you stuck — and how to fix it. For B2B product founders.",
+    name: "Understand Your Next Move",
+    description: "You'll get clear, actionable steps to reduce your dependency and grow with freedom.",
     icon: ServerIcon,
   },
 ];
@@ -69,14 +67,10 @@ export default function OptInDesktop(props) {
             <div className="max-w-full lg:max-w-xl mx-auto lg:mx-0">
               <h2 className="text-2xl sm:text-3xl lg:text-lg font-semibold text-gray-400">Free Quiz</h2>
               <p className="mt-4 text-6xl sm:text-7xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-                {titleVariant === "A" ? (
-                  <>STILL WORKING <span className="text-[#FF8257]">60 HOUR WEEKS?</span></>
-                ) : (
-                  <>MAKING MONEY BUT <span className="text-[#FF8257]">BURNT OUT?</span></>
-                )}
+                <span style={{ color: primary }}>$2M+</span> IN REVENUE, STILL <span style={{ color: primary }}>DOING IT ALL?</span>
               </p>
               <p className="mt-8 text-xl  text-gray-200">
-                This 2-minute scorecard shows where you’re still the bottleneck — and how to fix it.
+                Discover how much your business depends on you — and how to fix it.
               </p>
 
               <dl className="mt-12 space-y-12 text-gray-300">
@@ -109,7 +103,7 @@ export default function OptInDesktop(props) {
                 style={{ backgroundColor: "#FF5C5C" }}
 
               >
-                Take 2 Minute Quiz
+                Reveal My Score
               </button>
             </div>
           </div>

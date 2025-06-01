@@ -7,25 +7,23 @@ import {
 
 import { getSessionId } from "../../utils/getSessionId";
 import { trackEvent } from "../../utils/trackEvent";
-import { getABVariant } from "@/utils/abTest";
 import { trackFbEvent } from "@/utils/fbPixel";
 
-const titleVariant = getABVariant("headlineText", ["A", "B"]);
 
 const features = [
   {
     name: "Answer Few Questions",
-    description: "2-min Quiz will give you an AHA moment why you are stuck",
+    description: "This quick 2-minute quiz reveals what’s really holding you back.",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Get Peronalized Scorecard",
-    description: "Based on your answers we generate personalized report.",
+    name: "Get Personalized Scorecard",
+    description: "We’ll break down exactly where your business depends on you — and how to fix it.",
     icon: LockClosedIcon,
   },
   {
-    name: "Understand Next Steps",
-    description: "In the report you get suggetions and next step to get you unstuck",
+    name: "Understand Your Next Move",
+    description: "You'll get clear, actionable steps to reduce your dependency and grow with freedom.",
     icon: ServerIcon,
   },
 ];
@@ -66,10 +64,10 @@ export default function OptInMobile({ onNext }) {
     >
       <div className="text-center space-y-4">
         <h1 className="mx-5 text-center text-8xl font-bold text-white leading-snug">
-          WORKING <span style={{ color: primary }}>60 HOUR WEEKS?</span>
+          <span style={{ color: primary }}>$2M+</span> IN REVENUE, STILL <span style={{ color: primary }}>DOING IT ALL?</span>
         </h1>
         <p className="text-5xl text-gray-200 mt-2">
-          Find where the issue is in 2 minutes
+          Find out your Dependency Score in 2 minutes
         </p>
       </div>
 
@@ -99,7 +97,7 @@ export default function OptInMobile({ onNext }) {
         style={{ backgroundColor: "#FF5C5C" }}
 
       >
-        Take 2 Minute Quiz
+         Reveal My Score
       </button>
     </section>
   );

@@ -16,7 +16,7 @@ export const trackEvent = async ({
   event,
   sessionId,
   device,
-  variant = localStorage.getItem("variant") || '',
+  variant = 'NO A/B',
   test_name = localStorage.getItem("test_name") || '',
   metadata = {}
 }) => {
