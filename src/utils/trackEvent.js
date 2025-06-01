@@ -16,25 +16,24 @@ export const trackEvent = async ({
   event,
   sessionId,
   device,
-  variant = 'NO A/B',
+  metadata = {},
+  variant = localStorage.getItem("variant") || 'NO A/B',
   test_name = localStorage.getItem("test_name") || '',
-  metadata = {}
 }) => {
-  // Only production
   const isProd = import.meta.env.MODE === "production";
   if (!isProd || typeof window === "undefined" || typeof window.fbq !== "function") return;
 
-  const referer = document.referrer || window.location.href
-  const utmKey = `utm_saved`
-  const trackKey = `tracked_${event}_${sessionId}`
+  const referer = document.referrer || window.location.href;
+  const utmKey = `utm_saved`;
+  const trackKey = `tracked_${event}_${sessionId}`;
+  if (localStorage.getItem(trackKey)) return;
 
-  if (localStorage.getItem(trackKey)) return
-
-  const shouldSendUTM = !localStorage.getItem(utmKey)
   const fullMetadata = {
     ...metadata,
-    ...(shouldSendUTM ? { utm: getUTMParams() } : {}),
-  }
+    quiz_version: localStorage.getItem("quiz_version") || '',
+    campaign: localStorage.getItem("campaign") || '',
+    utm: getUTMParams(),
+  };
 
   try {
     const { error } = await supabase.from("events").insert({
@@ -45,15 +44,13 @@ export const trackEvent = async ({
       metadata: fullMetadata,
       variant,
       test_name,
-    })
+    });
 
-    if (error) throw error
+    if (error) throw error;
 
-    localStorage.setItem(trackKey, "true")
-    if (shouldSendUTM) {
-      localStorage.setItem(utmKey, "true")
-    }
+    localStorage.setItem(trackKey, "true");
+  
   } catch (err) {
-    console.error("❌ Failed to send event", err)
+    console.error("❌ Failed to send event", err);
   }
-}
+};
