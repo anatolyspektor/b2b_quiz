@@ -4,11 +4,10 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { saveCustomer } from "../../utils/saveCustomer";
 import { trackEvent } from "../../utils/trackEvent";
 import { getSessionId } from "../../utils/getSessionId";
-import { sendSlackEmailAdded } from "@/utils/slack"
-import { generateScorecard, getChokePoints} from "@/utils/quizUtils";
+import { sendSlackEmailAdded } from "@/utils/slack";
+import { generateScorecard, getChokePoints } from "@/utils/quizUtils";
 import { trackFbEvent } from "@/utils/fbPixel";
 import { sendToKlaviyo } from "@/utils/sendToKlaviyo";
-
 
 export default function QuizDesktop({ onComplete }) {
   const [answers, setAnswers] = useState({});
@@ -17,16 +16,16 @@ export default function QuizDesktop({ onComplete }) {
   const [finalAnswers, setFinalAnswers] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const currentQuestion = questions[step];
   const TOTAL_QUESTIONS = questions.length;
-
   const sessionId = getSessionId();
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleAnswer = (option) => {
-    const value = option.label; // ✅ Use option.label
+    const value = option.label;
     let updatedAnswers = { ...answers };
 
     if (currentQuestion.multi) {
@@ -49,6 +48,7 @@ export default function QuizDesktop({ onComplete }) {
         setStep((prev) => prev + 1);
       }
     }
+
     trackEvent({
       event: `quiz_step_${step + 1}`,
       sessionId,
@@ -56,11 +56,12 @@ export default function QuizDesktop({ onComplete }) {
       metadata: {
         question: currentQuestion?.question,
         answer: value,
-    },
-  });
-  trackFbEvent('AnswerSelected', {
+      },
+    });
+
+    trackFbEvent("AnswerSelected", {
       question: currentQuestion?.question,
-      answer: value
+      answer: value,
     });
   };
 
@@ -68,8 +69,18 @@ export default function QuizDesktop({ onComplete }) {
     if (step > 0) setStep((prev) => prev - 1);
   };
 
-const handleFinalSubmit = async ({ sessionId, name, email }) => {
-  if (name && isValidEmail(email)) {
+  const handleFinalSubmit = async ({ sessionId, name, email }) => {
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
+
     const scorecard = generateScorecard(answers);
     const { score, zone, color, workHrs, bleedPerWeek } = scorecard;
     const chokePointsHTML = getChokePoints(answers);
@@ -90,9 +101,17 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       answers,
       ...scorecard,
     });
-    
-    sendToKlaviyo({ name, email, score, zone,  workHrs, bleedPerWeek, revenue: answers.revenue,   chokePoints: chokePointsHTML.join("\n") });
 
+    sendToKlaviyo({
+      name,
+      email,
+      score,
+      zone,
+      workHrs,
+      bleedPerWeek,
+      revenue: answers.revenue,
+      chokePoints: chokePointsHTML.join("\n"),
+    });
 
     onComplete({
       name,
@@ -100,7 +119,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       answers,
       ...scorecard,
       sessionId,
-      chokePointsHTML, // only for frontend
+      chokePointsHTML,
     });
 
     trackEvent({
@@ -110,15 +129,11 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       metadata: answers,
     });
 
-  trackFbEvent('Lead', {
-    content_name: '2 Minute Quiz',
-    email,
-  });
-
-  }
-};
-
-
+    trackFbEvent("Lead", {
+      content_name: "2 Minute Quiz",
+      email,
+    });
+  };
 
   const isSelected = (value) => {
     const val = answers[currentQuestion?.field];
@@ -131,8 +146,8 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
     return (
       <section className="min-h-screen flex items-center justify-center px-8 py-10" style={{ backgroundColor: "#275659" }}>
         <div className="w-full max-w-4xl bg-white/5 backdrop-blur px-8 py-10 text-center shadow-sm rounded-lg">
-          <h2 className="text-4xl mb-6 leading-snug text-[#F1FDED]">
-            If you get <strong>DISCONNECTED</strong>, where should we send the results?
+          <h2 className="text-3xl mb-6 leading-snug text-[#F1FDED]">
+            Your Score Is <strong>READY</strong>. Where Should We Send It?
           </h2>
           <input
             type="text"
@@ -150,20 +165,14 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
             className="mt-4 w-full rounded-md border px-4 py-4 text-xl shadow-sm placeholder-white"
             style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
           />
-        <button
-          onClick={() =>
-            handleFinalSubmit({
-              sessionId,
-              name,
-              email,
-            })
-          }
-          disabled={!name || !isValidEmail(email)}
-          className="mt-6 w-full rounded-md px-6 py-5 text-white text-2xl font-semibold transition disabled:opacity-50"
-          style={{ backgroundColor: "#FF5C5C" }}
-        >
-          See My Results
-        </button>
+          {error && <p className="text-red-400 text-xl mt-4">{error}</p>}
+          <button
+            onClick={() => handleFinalSubmit({ sessionId, name, email })}
+            className="mt-6 w-full rounded-md px-6 py-5 text-white text-2xl font-semibold transition"
+            style={{ backgroundColor: "#FF5C5C" }}
+          >
+            REVEAL MY SCORE
+          </button>
         </div>
       </section>
     );

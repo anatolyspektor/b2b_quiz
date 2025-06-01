@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import questions from "../../questions";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
@@ -16,6 +17,7 @@ export default function QuizMobile({ onComplete }) {
   const [finalAnswers, setFinalAnswers] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const currentQuestion = questions[step];
   const TOTAL_QUESTIONS = questions.length;
@@ -25,7 +27,7 @@ export default function QuizMobile({ onComplete }) {
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleAnswer = (option) => {
-    const value = option.label; // ✅ Use option.label
+    const value = option.label;
     let updatedAnswers = { ...answers };
 
     if (currentQuestion.multi) {
@@ -48,6 +50,7 @@ export default function QuizMobile({ onComplete }) {
         setStep((prev) => prev + 1);
       }
     }
+
     trackEvent({
       event: `quiz_step_${step + 1}`,
       sessionId,
@@ -55,8 +58,8 @@ export default function QuizMobile({ onComplete }) {
       metadata: {
         question: currentQuestion?.question,
         answer: value,
-    },
-  });
+      },
+    });
 
     trackFbEvent('AnswerSelected', {
       question: currentQuestion?.question,
@@ -68,8 +71,18 @@ export default function QuizMobile({ onComplete }) {
     if (step > 0) setStep((prev) => prev - 1);
   };
 
-const handleFinalSubmit = async ({ sessionId, name, email }) => {
-  if (name && isValidEmail(email)) {
+  const handleFinalSubmit = async ({ sessionId, name, email }) => {
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
+
     const scorecard = generateScorecard(answers);
     const { score, zone, color, workHrs, bleedPerWeek } = scorecard;
     const chokePointsHTML = getChokePoints(answers);
@@ -91,7 +104,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       ...scorecard,
     });
 
-    sendToKlaviyo({ name, email, score, zone,  workHrs, bleedPerWeek, revenue: answers.revenue,   chokePoints: chokePointsHTML.join("\n") });
+    sendToKlaviyo({ name, email, score, zone, workHrs, bleedPerWeek, revenue: answers.revenue, chokePoints: chokePointsHTML.join("\n") });
 
     onComplete({
       name,
@@ -99,7 +112,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       answers,
       ...scorecard,
       sessionId,
-      chokePointsHTML, // only for frontend
+      chokePointsHTML,
     });
 
     trackEvent({
@@ -113,10 +126,7 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       content_name: '2 Minute Quiz',
       email,
     });
-  }
-};
-
-
+  };
 
   const isSelected = (value) => {
     const val = answers[currentQuestion?.field];
@@ -125,13 +135,12 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
       : val === value;
   };
 
-
   if (isQuizFinished) {
     return (
       <section className="min-h-screen flex items-center justify-center px-4 py-10" style={{ backgroundColor: "#275659" }}>
         <div className="w-full bg-white/5 backdrop-blur px-4 py-8 text-center shadow-sm rounded-md">
           <h2 className="text-6xl mb-15 leading-snug text-[#F1FDED]">
-            If you get <strong>DISCONNECTED</strong>, where should we send the results?
+            Your Score Is <strong>READY</strong> — Where Should We Send It?
           </h2>
           <input
             type="text"
@@ -149,19 +158,13 @@ const handleFinalSubmit = async ({ sessionId, name, email }) => {
             className="mt-4 w-full rounded-md border px-10 py-10 text-5xl shadow-sm placeholder-white"
             style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
           />
+          {error && <p className="text-red-400 text-4xl mt-4">{error}</p>}
           <button
-            onClick={() =>
-              handleFinalSubmit({
-                sessionId,
-                name,
-                email,
-              })
-            }
-            disabled={!name || !isValidEmail(email)}
-            className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition disabled:opacity-50"
+            onClick={() => handleFinalSubmit({ sessionId, name, email })}
+            className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition"
             style={{ backgroundColor: "#FF5C5C" }}
           >
-            See My Results
+            REVEAL MY SCORE
           </button>
         </div>
       </section>
