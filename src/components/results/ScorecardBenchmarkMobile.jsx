@@ -77,11 +77,18 @@ export default function ScorecardBenchmarkMobile({
             You're <span className="font-bold">{boundedPercentile >= 50 ? "above" : "below"}</span>{" "}
             <span className={textColor[zone] + " font-bold"}>{boundedPercentile}%</span> of founders.
           </p>
-          {(zone === "RED" || zone === "YELLOW") && (
+          {zone === "RED" && boundedPercentile < 50 && (
             <p className="text-3xl text-gray-300">
               That’s why everything still runs through you.
             </p>
           )}
+
+          {zone === "YELLOW" && (
+            <p className="text-3xl text-gray-300">
+              You’re doing better, but things still often run through you.
+            </p>
+          )}
+
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { sendSlackEmailAdded } from "@/utils/slack"
 import { generateScorecard, getChokePoints} from "@/utils/quizUtils";
 import { trackFbEvent } from "@/utils/fbPixel";
 import { sendToKlaviyo } from "@/utils/sendToKlaviyo";
+import EmailGateMobile from "./EmailGateMobile";
 
 export default function QuizMobile({ onComplete }) {
   const [answers, setAnswers] = useState({});
@@ -137,38 +138,15 @@ export default function QuizMobile({ onComplete }) {
 
   if (isQuizFinished) {
     return (
-      <section className="min-h-screen flex items-center justify-center px-4 py-10" style={{ backgroundColor: "#275659" }}>
-        <div className="w-full bg-white/5 backdrop-blur px-4 py-8 text-center shadow-sm rounded-md">
-          <h2 className="text-6xl mb-15 leading-snug text-[#F1FDED]">
-            Your Score Is <strong>READY</strong> — Where Should We Send It?
-          </h2>
-          <input
-            type="text"
-            placeholder="Your name..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-4 w-full rounded-md border px-10 py-10 text-5xl shadow-sm placeholder-white"
-            style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
-          />
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-4 w-full rounded-md border px-10 py-10 text-5xl shadow-sm placeholder-white"
-            style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
-          />
-          {error && <p className="text-red-400 text-4xl mt-4">{error}</p>}
-          <button
-            onClick={() => handleFinalSubmit({ sessionId, name, email })}
-            className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition"
-            style={{ backgroundColor: "#FF5C5C" }}
-          >
-            REVEAL MY SCORE
-          </button>
-        </div>
-      </section>
-    );
+        <EmailGateMobile
+          name={name}
+          email={email}
+          setName={setName}
+          setEmail={setEmail}
+          error={error}
+          onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
+        />
+      );
   }
 
   return (

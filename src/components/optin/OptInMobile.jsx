@@ -94,9 +94,7 @@ export default function OptInMobile({ onNext }) {
 
       <button
         onClick={handleClick}
-        className="w-full  max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition "
-        style={{ backgroundColor: "#FF5C5C" }}
-
+        className="w-full  max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition bg-red-500 hover:bg-red-600"
       >
          Take 2 Minute Quiz
       </button>

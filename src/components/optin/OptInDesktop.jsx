@@ -98,8 +98,7 @@ export default function OptInDesktop(props) {
             <div className="w-full text-center">
               <button
                 onClick={handleClick}
-                className="w-full rounded-md px-8 py-6 text-xl sm:text-4xl font-semibold text-white shadow transition"
-                style={{ backgroundColor: "#FF5C5C" }}
+                className="w-full rounded-md px-8 py-6 text-xl sm:text-4xl font-semibold text-white shadow transition bg-red-500 hover:bg-red-600"
 
               >
                 Take 2 Minute Quiz

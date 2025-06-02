@@ -42,8 +42,8 @@ export default function Results({
           </h3>
 
           {/* Subheadline */}
-          <p className="text-4xl text-gray-300">
-            We’ll show you 2 things to delegate this week. Live.
+          <p className="text-3xl text-gray-300">
+            Based on your answers,we’ll show you 2 things to delegate this week. Live.
           </p>
 
           {/* Quote Block */}
