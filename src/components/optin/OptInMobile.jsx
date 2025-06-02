@@ -17,20 +17,20 @@ const features = [
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Get Personalized Scorecard",
-    description: "We’ll break down exactly where your business depends on you — and how to fix it.",
+    name: "Get Personalized Insights",
+    description: "Understand how much money does it cost you.",
     icon: LockClosedIcon,
   },
   {
     name: "Based on 150+ Founders",
-    description: "The results are based on work with more than 150 founders.",
+    description: "The results are based on work with 150+ founders.",
     icon: ServerIcon,
   },
 ];
 
 export default function OptInMobile({ onNext }) {
-  const primary = "#FF8257";
-  const background = "#275659";
+  const primary = "#FF8000";
+  const background = "#0f373c";
 
   const sessionId = getSessionId();
   const hasTracked = useRef(false);
@@ -63,19 +63,18 @@ export default function OptInMobile({ onNext }) {
       style={{ backgroundColor: background }}
     >
       <div className="text-center space-y-4">
-        <h1 className="mx-5 text-center text-7xl font-bold text-white leading-snug">
+        <h1 className="mt-5 mx-5 text-center text-8xl font-bold text-white leading-snug">
             WORKING <span style={{ color: primary }}>60 HOUR WEEKS?</span>
         </h1>
-        <p className="text-5xl text-gray-200 mt-2">
-          This 2-minute scorecard shows where you’re still the bottleneck.
-
+        <p className="text-4xl/10 text-gray-200 mt-1">
+          Take a test and get your <strong>BUSINESS DEPENDENCY SCORE.</strong>
         </p>
       </div>
 
       <img
-        src="/frosted-report.jpg"
+        src="/frosted-report-mobile.png"
         alt="Scorecard preview"
-        className="mb-5 mt-5 w-full max-w-xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
+        className=" w-full max-w-4xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
       />
 
       <div className="space-y-6 text-left w-full max-w-4xl">
@@ -96,8 +95,11 @@ export default function OptInMobile({ onNext }) {
         onClick={handleClick}
         className="w-full  max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition bg-red-500 hover:bg-red-600"
       >
-         Take 2 Minute Quiz
+         Take 2 Minute Test
       </button>
+      <p className="text-3xl text-center text-[#F1FDED] mb-25 ">
+          Private report. No spam. <strong>Based on 150+ $2M+ founders.</strong>
+      </p>
     </section>
   );
 }

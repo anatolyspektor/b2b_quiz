@@ -17,19 +17,19 @@ const features = [
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Get Personalized Scorecard",
-    description: "We’ll break down exactly where your business depends on you — and how to fix it.",
+    name: "Get Personalized Insights",
+    description: "Understand how much money does it cost you.",
     icon: LockClosedIcon,
   },
   {
     name: "Based on 150+ Founders",
-    description: "The results are based on work with more than 150 founders.",
+    description: "The results are based on work with 150+ founders.",
     icon: ServerIcon,
   },];
 
 export default function OptInDesktop(props) {
-  const primary = "#FF8257";
-  const background = "#275659";
+  const primary = "#FF8000";
+  const background = "#0f373c";
 
   const sessionId = getSessionId();
 
@@ -64,12 +64,12 @@ export default function OptInDesktop(props) {
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:items-start">
           <div className="lg:pt-6 lg:pr-12">
             <div className="max-w-full lg:max-w-xl mx-auto lg:mx-0">
-              <h2 className="text-2xl sm:text-3xl lg:text-lg font-semibold text-gray-400">Free Quiz</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-lg font-semibold text-gray-400">Free Test</h2>
               <p className="mt-4 text-6xl sm:text-7xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
                   WORKING <span style={{ color: primary }}>60 HOUR WEEKS?</span>
               </p>
               <p className="mt-8 text-xl  text-gray-200">
-                  This 2-minute scorecard shows where you’re still the bottleneck — and how to fix it.
+                  This 2-minute test shows <strong>how much you dependent on your business</strong>.
               </p>
 
               <dl className="mt-12 space-y-12 text-gray-300">
@@ -101,8 +101,11 @@ export default function OptInDesktop(props) {
                 className="w-full rounded-md px-8 py-6 text-xl sm:text-4xl font-semibold text-white shadow transition bg-red-500 hover:bg-red-600"
 
               >
-                Take 2 Minute Quiz
+                Take 2 Minute Test
               </button>
+            <p className="text-md text-center text-gray-300 mt-2 ">
+                Private report. No spam. <strong>Based on 150+ $2M+ founders.</strong>
+            </p>
             </div>
           </div>
         </div>
