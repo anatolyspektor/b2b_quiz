@@ -12,8 +12,8 @@ import { trackFbEvent } from "@/utils/fbPixel";
 
 const features = [
   {
-    name: "Answer Few Questions",
-    description: "This quick 2-minute quiz reveals what’s really holding you back.",
+    name: "Answer 6 Simple Questions",
+    description: "Find out where things break when you're not there.",
     icon: CloudArrowUpIcon,
   },
   {
@@ -22,8 +22,8 @@ const features = [
     icon: LockClosedIcon,
   },
   {
-    name: "Understand Your Next Move",
-    description: "You'll get clear, actionable steps to reduce your dependency and grow with freedom.",
+    name: "Based on 150+ Founders",
+    description: "The results are based on work with more than 150 founders.",
     icon: ServerIcon,
   },
 ];
@@ -63,11 +63,12 @@ export default function OptInMobile({ onNext }) {
       style={{ backgroundColor: background }}
     >
       <div className="text-center space-y-4">
-        <h1 className="mx-5 text-center text-8xl font-bold text-white leading-snug">
-          <span style={{ color: primary }}>$2M+</span> IN REVENUE, STILL <span style={{ color: primary }}>DOING IT ALL?</span>
+        <h1 className="mx-5 text-center text-7xl font-bold text-white leading-snug">
+            WORKING <span style={{ color: primary }}>60 HOUR WEEKS?</span>
         </h1>
         <p className="text-5xl text-gray-200 mt-2">
-          Find out your Dependency Score in 2 minutes
+          This 2-minute scorecard shows where you’re still the bottleneck.
+
         </p>
       </div>
 
@@ -79,13 +80,13 @@ export default function OptInMobile({ onNext }) {
 
       <div className="space-y-6 text-left w-full max-w-4xl">
         {features.map((feature) => (
-          <div key={feature.name} className="flex items-start gap-4 mb-5">
+          <div key={feature.name} className="flex items-start gap-7 mb-0">
             <feature.icon className="text-2xl h-15 w-15 mt-1" style={{ color: primary }} />
             <div>
               <p className="text-6xl font-semibold  mb-5" style={{ color: primary }}>
                 {feature.name}
               </p>
-              <p className="text-gray-200 text-4xl/12 text-left">{feature.description}</p>
+              <p className="text-gray-200 text-4xl/15 text-left">{feature.description}</p>
             </div>
           </div>
         ))}
@@ -97,7 +98,7 @@ export default function OptInMobile({ onNext }) {
         style={{ backgroundColor: "#FF5C5C" }}
 
       >
-         Reveal My Score
+         Take 2 Minute Quiz
       </button>
     </section>
   );
