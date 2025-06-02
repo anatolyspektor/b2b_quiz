@@ -7,7 +7,7 @@ export default function EmailGate({ name, email, setName, setEmail, onSubmit, er
       <img
         src="/mobile-scorecard.png"
         alt="Score Preview"
-        className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-105 z-0"
+        className="absolute inset-0 w-full h-full object-cover blur-md opacity-50 scale-105 z-0"
       />
 
       {/* Foreground Content */}
@@ -43,7 +43,7 @@ export default function EmailGate({ name, email, setName, setEmail, onSubmit, er
           REVEAL MY SCORE
         </button>
 
-        <p className="text-2xl text-center text-[#F1FDED] mt-10">
+        <p className="text-3xl text-center text-[#F1FDED] mt-10">
           Private report. No spam. <strong>Based on 150+ $2M+ founders.</strong>
         </p>
       </div>
