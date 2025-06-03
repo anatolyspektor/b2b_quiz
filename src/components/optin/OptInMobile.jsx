@@ -58,9 +58,9 @@ export default function OptInMobile({ onNext }) {
       </div>
 
       <img
-        src="/frosted-report-mobile.png"
+        src="/frosted-report-mobile.jpg"
         alt="Scorecard preview"
-        className=" w-full max-w-4xl rounded-xl ring-1 ring-gray-400/10 shadow-xl"
+        className=" w-full max-w-3xl rounded-xl ring-1 ring-gray-400/10 border-4 border-double border-green-500"
       />
 
       <div className="space-y-6 text-left w-full max-w-4xl">

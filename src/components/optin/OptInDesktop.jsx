@@ -76,7 +76,7 @@ export default function OptInDesktop(props) {
               src="/frosted-report.jpg"
               width={2432}
               height={1442}
-              className="w-full sm:w-full rounded-xl ring-1 shadow-xl ring-gray-400/10"
+              className=" w-full max-w-4xl rounded-xl ring-1 ring-gray-400/10 border-2 border-double border-green-500"
               alt="Scorecard preview"
             />
 
@@ -87,7 +87,7 @@ export default function OptInDesktop(props) {
                 dangerouslySetInnerHTML={{ __html: variantData.cta }}
               />
               <p className="text-md text-center text-gray-300 mt-2 ">
-                 Based on work with<strong>150+ $2M+ founders.</strong>
+                 Based on work with <strong>150+ $2M+ founders.</strong>
               </p>
             </div>
           </div>

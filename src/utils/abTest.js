@@ -4,7 +4,7 @@ export const AB_TESTS = {
   "optin_headline_test": {
     v1: {
       heading: "WORKING <span style='color:#FF8000;'>60 HOUR WEEKS?</span>",
-      subheading: "Take a test and get your <strong>BUSINESS DEPENDENCY SCORE</strong>.",
+      subheading: "Take 2 minute test and see how you compare to <strong>150+ founders</strong>.",
       cta: "Take 2 Minute Test",
       features: [
         {
@@ -22,9 +22,15 @@ export const AB_TESTS = {
       ]
     },
    v5: {
-      heading: "How Much Does Your Business <span style='color:#FF8000;'>Still Depend on You?</span>",
-      subheading: "Get your <strong>Dependency Score</strong> and what to fix first.",
-      cta: "Start My 2-Minute Test",
+      heading: "Built a $2M+ Business, <span style='color:#FF8000;'> But Still Can’t Step Away</span> ?",
+      subheading: "This quick diagnostic shows where the bottlenecks are and what to do next. ",
+      cta: "TAKE 2 MINUTE TEST",
+      features: []
+    },
+    v6: {
+      heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
+      subheading: "Take this 2-minute test to see if it runs without you. ",
+      cta: "GET MY SCORE",
       features: []
     }
 
