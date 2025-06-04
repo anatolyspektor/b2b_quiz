@@ -6,34 +6,30 @@ export const AB_TESTS = {
       heading: "WORKING <span style='color:#FF8000;'>60 HOUR WEEKS?</span>",
       subheading: "Take 2 minute test and see how you compare to <strong>150+ founders</strong>.",
       cta: "Take 2 Minute Test",
-      features: [
-        {
-          name: "Answer 6 Simple Questions",
-          description: "Find out where things break when you're not there."
-        },
-        {
-          name: "Get Personalized Insights",
-          description: "Understand how much money does it cost you."
-        },
-        {
-          name: "Based on 150+ Founders",
-          description: "The results are based on work with 150+ founders."
-        },
-      ]
+      image: "/v1.png",
+      features: []
     },
    v5: {
       heading: "Built a $2M+ Business, <span style='color:#FF8000;'> But Still Can’t Step Away</span> ?",
       subheading: "This quick diagnostic shows where the bottlenecks are and what to do next. ",
       cta: "TAKE 2 MINUTE TEST",
+      image: "/v5.png",
       features: []
     },
     v6: {
       heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
       subheading: "Take this 2-minute test to see if it runs without you. ",
       cta: "GET MY SCORE",
+      image: "/v6.png",
+      features: []
+    },
+    v7: {
+      heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
+      subheading: "Take this 2-minute test to see if it runs without you. ",
+      cta: "GET MY SCORE",
+      image: "/v7.png",
       features: []
     }
-
   }
 };
 

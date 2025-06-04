@@ -58,7 +58,7 @@ export default function OptInMobile({ onNext }) {
       </div>
 
       <img
-        src="/frosted-report-mobile.jpg"
+          src={variantData.image}
         alt="Scorecard preview"
         className=" w-full max-w-3xl rounded-xl ring-1 ring-gray-400/10 border-4 border-double border-green-500"
       />

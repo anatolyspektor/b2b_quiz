@@ -71,9 +71,9 @@ export default function OptInDesktop(props) {
             </div>
           </div>
 
-          <div className="w-full px-4 py-20 flex flex-col items-center gap-8">
+          <div className="max-w-lg px-4 py-20 flex flex-col items-center gap-8">
             <img
-              src="/frosted-report.jpg"
+              src={variantData.image}
               width={2432}
               height={1442}
               className=" w-full max-w-4xl rounded-xl ring-1 ring-gray-400/10 border-2 border-double border-green-500"
