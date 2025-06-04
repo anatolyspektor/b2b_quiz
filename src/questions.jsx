@@ -1,5 +1,19 @@
 const questions = [
-  // 1 ─────────────── time invested
+
+
+ // 1 ─────────────── process documentation
+  {
+    field: "processDocs",
+    question: "Do you have all the important processes documented and regularly updated?",
+    type: "select",
+    options: [
+      { label: "Yes", weight: 20 },
+      { label: "No",  weight: 0  },
+    ],
+  },
+
+
+  // 2 ─────────────── time invested
   {
     field: "weeklyHours",
     question: "How many hours did you work last week?",
@@ -13,17 +27,7 @@ const questions = [
     ],
   },
 
-  // 2 ─────────────── process documentation
-  {
-    field: "processDocs",
-    question: "Do you have all the important processes documented and regularly updated?",
-    type: "select",
-    options: [
-      { label: "Yes", weight: 20 },
-      { label: "No",  weight: 0  },
-    ],
-  },
-
+ 
   // 3 ─────────────── daily interruptions
   {
     field: "dailyInterrupts",

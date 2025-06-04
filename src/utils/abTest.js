@@ -19,14 +19,14 @@ export const AB_TESTS = {
     v6: {
       heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
       subheading: "Take this 2-minute test to see if it runs without you. ",
-      cta: "GET MY SCORE",
+      cta: "Take 2 Minute Test",
       image: "/v6.png",
       features: []
     },
     v7: {
       heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
       subheading: "Take this 2-minute test to see if it runs without you. ",
-      cta: "GET MY SCORE",
+      cta: "Take 2 Minute Test",
       image: "/v7.png",
       features: []
     }
