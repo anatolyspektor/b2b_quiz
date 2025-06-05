@@ -3,32 +3,52 @@
 export const AB_TESTS = {
   "optin_headline_test": {
     v1: {
-      heading: "WORKING <span style='color:#FF8000;'>60 HOUR WEEKS?</span>",
-      subheading: "Take 2 minute test and see how you compare to <strong>150+ founders</strong>.",
-      cta: "Take 2 Minute Test",
+      heading: "Disocver your business <span style='color:#FF8000;'>dependency score</span>",
+      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>llet go of control in 1 year (or earlier)</strong>",
+      cta: "Get Your Score Instantly",
       image: "/v1.png",
-      features: []
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      ]
     },
    v5: {
       heading: "Built a $2M+ Business, <span style='color:#FF8000;'> But Still Can’t Step Away</span> ?",
-      subheading: "This quick diagnostic shows where the bottlenecks are and what to do next. ",
-      cta: "TAKE 2 MINUTE TEST",
+      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
+      cta: "Get Your Score Instantly",
       image: "/v5.png",
-      features: []
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      ]
     },
     v6: {
       heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
-      subheading: "Take this 2-minute test to see if it runs without you. ",
-      cta: "Take 2 Minute Test",
+      subheading: "In two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
+      cta: "Get Your Score Instantly",
       image: "/v6.png",
-      features: []
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      ]
     },
     v7: {
       heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
-      subheading: "Take this 2-minute test to see if it runs without you. ",
-      cta: "Take 2 Minute Test",
+      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
+      cta: "Get Your Score Instantly",
       image: "/v7.png",
-      features: []
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      ]
     }
   }
 };

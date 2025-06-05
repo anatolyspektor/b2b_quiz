@@ -47,49 +47,69 @@ export default function OptInMobile({ onNext }) {
       style={{ backgroundColor: background }}
     >
       <div className="text-center space-y-4">
+
         <h1
-          className="mt-5 mx-5 text-center text-8xl font-bold text-white leading-snug"
+          className="mt-5 mx-5 text-center text-8xl font-bold text-white"
           dangerouslySetInnerHTML={{ __html: variantData.heading }}
         />
         <p
-          className="text-4xl/10 text-gray-200 mt-1"
+          className="text-5xl/16 text-gray-200 mt-10  dark:text-gray-300"
           dangerouslySetInnerHTML={{ __html: variantData.subheading }}
         />
       </div>
 
       <img
-          src={variantData.image}
+        src={variantData.image}
         alt="Scorecard preview"
         className=" w-full max-w-3xl rounded-xl ring-1 ring-gray-400/10 border-4 border-double border-green-500"
       />
 
-      <div className="space-y-6 text-left w-full max-w-4xl">
-        {variantData.features.map((feature, index) => (
-          <div key={index} className="flex items-start gap-7 mb-0">
-            <CloudArrowUpIcon className="text-2xl h-15 w-15 mt-1" style={{ color: primary }} />
-            <div>
-              <p
-                className="text-6xl font-semibold mb-5"
-                style={{ color: primary }}
-                dangerouslySetInnerHTML={{ __html: feature.name }}
-              />
-              <p
-                className="text-gray-200 text-4xl/15 text-left"
-                dangerouslySetInnerHTML={{ __html: feature.description }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <button
+            <button
         onClick={handleClick}
         className="w-full max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition bg-red-500 hover:bg-red-600"
         dangerouslySetInnerHTML={{ __html: variantData.cta }}
       />
+      <p className="text-3xl text-center text-[#F1FDED] mb-10 text-gray-300">
+         Most founders cannot leave for more than <strong>3 weeks</strong>
+      </p>
 
-      <p className="text-3xl text-center text-[#F1FDED] mb-25 ">
-         Based on work with<strong> 150+ $2M+ founders.</strong>
+      <div className="space-y-6 text-left w-full max-w-4xl">
+        
+            <ul >
+            {variantData.features.map((feature, index) => (
+              <li key={index}
+                className="text-gray-200 text-6xl/20 text-left mb-10 dark:text-gray-300"
+                dangerouslySetInnerHTML={{ __html: feature.description }}
+              />
+              ))}
+            </ul>
+
+      </div>
+          {/* Quote Block */}
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex items-start gap-4 max-w-4xl text-left">
+              <div className="border-l-4 border-green-400 pl-4">
+                <p className="text-5xl  text-white leading-snug">
+                  “This Quiz enabled me to understand how much money I was wasting by trying to stay in control! I couldn't believe it at first... ”
+                </p>
+                <div className="flex items-center gap-3 mt-3">
+                  <div className="w-10 h-10 rounded-full bg-white text-[#0f373c] font-bold flex items-center justify-center text-lg">
+                    V
+                  </div>
+                  <span className="text-4xl text-gray-300">Victoria, $7M Industrial Manufacturing CEO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <button
+        onClick={handleClick}
+        className="w-full max-w-4xl rounded-md px-6 py-5 text-white text-7xl font-semibold shadow transition bg-red-500 hover:bg-red-600 mt-30"
+        dangerouslySetInnerHTML={{ __html: variantData.cta }}
+      />
+
+      <p className="text-3xl text-center text-[#F1FDED] mb-55 text-gray-300 ">
+         Our own algorithm based on work with<strong> 150+ founders.</strong>
       </p>
     </section>
   );

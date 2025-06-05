@@ -49,27 +49,43 @@ export default function OptInDesktop(props) {
             <div className="max-w-full lg:max-w-xl mx-auto lg:mx-0">
               <h2 className="text-2xl sm:text-3xl lg:text-lg font-semibold text-gray-400">Dependecy Score Test</h2>
               <p
-                className="mt-4 text-6xl sm:text-7xl lg:text-5xl font-bold tracking-tight text-white leading-tight"
+                className="mt-4 text-6xl  lg:text-4xl font-bold tracking-tight text-white leading-tight"
                 dangerouslySetInnerHTML={{ __html: variantData.heading }}
               />
               <p
-                className="mt-8 text-xl text-gray-200"
+                className="mt-10 text-xl text-gray-200"
                 dangerouslySetInnerHTML={{ __html: variantData.subheading }}
               />
 
-              <dl className="mt-12 space-y-12 text-gray-300">
-                {variantData.features.map((feature, index) => (
-                  <div key={index} className="relative pl-14">
-                    <dt className="block mb-2 text-orange-500" style={{ color: primary }}>
-                      <CloudArrowUpIcon className="absolute top-0 left-0 h-10 w-10" />
-                      <span className="text-3xl font-semibold" dangerouslySetInnerHTML={{ __html: feature.name }} />
-                    </dt>
-                    <dd className="text-gray-200 text-lg" dangerouslySetInnerHTML={{ __html: feature.description }} />
+                  <ul className="mt-10" >
+                    {variantData.features.map((feature, index) => (
+                      <li key={index}
+                        className="text-gray-200 text-xl/6 text-left mb-4 dark:text-gray-300"
+                        dangerouslySetInnerHTML={{ __html: feature.description }}
+                      />
+                      ))}
+                    </ul>
+
+            </div>
+                    {/* Quote Block */}
+          <div className="flex flex-col items-center gap-4 mt-20">
+            <div className="flex items-start gap-4 max-w-xl text-left">
+              <div className="border-l-4 border-green-400 pl-4">
+                <p className="text-lg  text-white leading-snug">
+                  “This Quiz enabled me to understand how much money I was wasting by trying to stay in control! I couldn't believe it at first... ”
+                </p>
+                <div className="flex items-center gap-3 mt-3">
+                  <div className="w-10 h-10 rounded-full bg-white text-[#0f373c] font-bold flex items-center justify-center text-lg">
+                    V
                   </div>
-                ))}
-              </dl>
+                  <span className="text-sm text-gray-300">Victoria, $7M Industrial Manufacturing CEO</span>
+                </div>
+              </div>
             </div>
           </div>
+          </div>
+
+  
 
           <div className="max-w-lg px-4 py-20 flex flex-col items-center gap-8">
             <img
@@ -83,11 +99,11 @@ export default function OptInDesktop(props) {
             <div className="w-full text-center">
               <button
                 onClick={handleClick}
-                className="w-full rounded-md px-8 py-6 text-xl sm:text-4xl font-semibold text-white shadow transition bg-red-500 hover:bg-red-600"
+                className="w-full rounded-md px-8 py-6 text-3xl font-semibold text-white shadow transition bg-red-500 hover:bg-red-600"
                 dangerouslySetInnerHTML={{ __html: variantData.cta }}
               />
               <p className="text-md text-center text-gray-300 mt-2 ">
-                 Based on work with <strong>150+ $2M+ founders.</strong>
+                  Our own algorithm based on work with<strong> 150+ founders.</strong>
               </p>
             </div>
           </div>
