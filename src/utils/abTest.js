@@ -2,54 +2,42 @@
 
 export const AB_TESTS = {
   "optin_headline_test": {
-    v9: {
-      heading: "Disocver your business <span style='color:#FF8000;'>dependency score</span>",
-      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
-      cta: "Get Your Score Instantly",
-      image: "/v9.png",
-      features: [
-
-      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
-      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
-      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
-      ]
-    },
-   v8: {
+    v10: {
       heading: "Built a 7-Figure Prison? <span style='color:#FF8000;'> Congrats.</span>",
-      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
-      cta: "Get Your Score Instantly",
-      image: "/v8.jpg",
+      subheading: "In two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>BREAK FREE from your business in 1 year (or earlier)</strong>",
+      cta: "Help Me Break Free",
+      image: "/v10.png",
       features: [
 
       { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
-      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
-      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
       ]
     },
-    v6: {
-      heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
-      subheading: "In two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
-      cta: "Get Your Score Instantly",
-      image: "/v6.png",
+    v11: {
+      heading: "Built a 7-Figure Prison? <span style='color:#FF8000;'> Congrats.</span>",
+      subheading: "In two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>BREAK FREE from your business in 1 year (or earlier)</strong>",
+      cta: "Help Me Break Free",
+      image: "/v11.png",
       features: [
 
       { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
-      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
-      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
       ]
     },
-    v7: {
-      heading: "Can You  <span style='color:#FF8000;'> Sell</span> Your Business?",
-      subheading: "In just two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>let go of control in 1 year (or earlier)</strong>",
-      cta: "Get Your Score Instantly",
-      image: "/v7.png",
+    v12: {
+      heading: "Built a 7-Figure Prison? <span style='color:#FF8000;'> Congrats.</span>",
+      subheading: "In two minutes you can uncover your <span style='color:#FF8000;'><strong>free, personalised business dependency score</strong></span> which will show you if you can  <strong>BREAK FREE from your business in 1 year (or earlier)</strong>",
+      cta: "Help Me Break Free",
+      image: "/v12.png",
       features: [
 
       { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
-      { description:"2. Get scored against the <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
-      { description:"3. Get a comprehensive report which tells you exactly what is the dependency, <span style='color:#FF8000;'><strong>how much it costs and how to fix it!</strong></span>"}
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
       ]
-    }
+    },
   }
 };
 
