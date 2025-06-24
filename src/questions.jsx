@@ -1,77 +1,75 @@
 const questions = [
 
-
- // 1 ─────────────── process documentation
+  // 1 ─────────────── process documentation → rewritten emotionally
   {
     field: "processDocs",
-    question: "Do you have all the important processes documented and regularly updated?",
+    question: "If you vanished for 2 weeks, what would break first?",
     type: "select",
     options: [
-      { label: "Yes", weight: 20 },
-      { label: "No",  weight: 0  },
+      { label: "Nothing — it runs without me", weight: 20 },
+      { label: "Some stuff might slow down",   weight: 15 },
+      { label: "I'd get calls hourly",         weight: 10 },
+      { label: "It’d collapse by day 3",       weight: 0  },
     ],
   },
 
-
-  // 2 ─────────────── time invested
+  // 2 ─────────────── time invested → reframed
   {
     field: "weeklyHours",
-    question: "How many hours did you work last week?",
+    question: "What does a normal work week look like for you?",
     type: "select",
     options: [
-      { label: "Less than 40", weight: 20 },
-      { label: "40–50",        weight: 15 },
-      { label: "51–60",        weight: 10 },
-      { label: "61–70",        weight: 5  },
-      { label: "71+",          weight: 0  },
+      { label: "I mostly oversee and review",  weight: 20 },
+      { label: "I lead, but have free blocks", weight: 15 },
+      { label: "I'm deep in ops most days",    weight: 10 },
+      { label: "Every hour is booked solid",   weight: 5  },
+      { label: "Chaos — I’m everywhere",       weight: 0  },
     ],
   },
 
- 
-  // 3 ─────────────── daily interruptions
+  // 3 ─────────────── daily interruptions → reframed
   {
     field: "dailyInterrupts",
-    question: "How many times do team members ask you quick questions each day?",
+    question: "How often does your team need you to unblock something?",
     type: "select",
     options: [
-      { label: "0–5",  weight: 20 },
-      { label: "6–10", weight: 15 },
-      { label: "11–20",weight: 10 },
-      { label: "21–30",weight: 5  },
-      { label: "31+",  weight: 0  },
+      { label: "Rarely — they know what to do", weight: 20 },
+      { label: "A few questions a day",         weight: 15 },
+      { label: "Constant Slack/DMs",            weight: 10 },
+      { label: "I’m the bottleneck daily",      weight: 0  },
     ],
   },
 
-  // 4 ─────────────── ops / inventory tracking  (multi-select → keep best score)
+  // 4 ─────────────── ops tracking → reframed but field-safe
   {
     field: "opsTracking",
-    question: "How do you keep track of what your business makes and sells? (select all that apply)",
+    question: "How do you keep track of what gets made, sold, and shipped? (select all that apply)",
     type: "select",
     multi: true,
     options: [
-      { label: "Special tools",                weight: 20 },
-      { label: "Simple software",              weight: 15 },
-      { label: "Spreadsheets",                 weight: 10 },
-      { label: "In my head / paper notes",     weight: 5  },
-      { label: "We don’t really track it",     weight: 0  },
+      { label: "Real-time dashboards",          weight: 20 },
+      { label: "Simple software we update",     weight: 15 },
+      { label: "Spreadsheets + manual review",  weight: 10 },
+      { label: "Mostly in my head",             weight: 5  },
+      { label: "Honestly… we don’t",            weight: 0  },
     ],
   },
 
-  // 5 ─────────────── personal energy
+  // 5 ─────────────── personal energy → reframed
   {
     field: "energyLevel",
-    question: "How do you feel on Monday mornings?",
+    question: "How do you feel about your business… really?",
     type: "select",
     options: [
-      { label: "Full of energy and ready", weight: 20 },
-      { label: "A little tired but okay",  weight: 15 },
-      { label: "Very tired",               weight: 10 },
-      { label: "Almost burned out",        weight: 5  },
-      { label: "Totally burned out",       weight: 0  },
+      { label: "Excited — it gives me energy",   weight: 20 },
+      { label: "Proud but tired",                weight: 15 },
+      { label: "Trapped in the day-to-day",      weight: 10 },
+      { label: "Exhausted but pushing through",  weight: 5  },
+      { label: "Done — I want out",              weight: 0  },
     ],
   },
 
-  // (Not scored – purely demographic / segmentation)
+  // ─────────────── segmentation (unchanged)
   {
     field: "revenue",
     question: "How much money did your business make last year?",
