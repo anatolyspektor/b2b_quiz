@@ -110,6 +110,42 @@ export const AB_TESTS = {
       { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
       ]
     },
+    v19: {
+      heading: "Is Your Business Running <span style='color:#FF8000;'> YOU ?</span>",
+      subheading: "In two minutes you can uncover your free, personalised <span style='color:#FF8000;'><strong>business dependency score</strong></span> which will show you if your business can run <strong>WITHOUT YOU</strong> within a year (or earlier).",
+      cta: "Get My Score",
+      image: "/v19.png",
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
+      ]
+    },
+    v21: {
+      heading: "Is Your Business Running <span style='color:#FF8000;'> YOU ?</span>",
+      subheading: "In two minutes you can uncover your free, personalised <span style='color:#FF8000;'><strong>business dependency score</strong></span> which will show you if your business can run <strong>WITHOUT YOU</strong> within a year (or earlier).",
+      cta: "Get My Score",
+      image: "/v21.png",
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
+      ]
+    },
+    v22: {
+      heading: "Is Your Business Running <span style='color:#FF8000;'> YOU ?</span>",
+      subheading: "In two minutes you can uncover your free, personalised <span style='color:#FF8000;'><strong>business dependency score</strong></span> which will show you if your business can run <strong>WITHOUT YOU</strong> within a year (or earlier).",
+      cta: "Get My Score",
+      image: "/v22.png",
+      features: [
+
+      { description:"1. Answer just <span style='color:#FF8000;'><strong>6 questions</strong></span> <i> (which takes under two minutes)</i>"},
+      { description:"2. Undestand where you stand against <span style='color:#FF8000;'><strong>150 $2m+ revenue founders</strong></span>"},
+      { description:"3. Get a comprehensive report which tells you exactly what keeps you chained, <span style='color:#FF8000;'><strong>how much it costs and how to escape!</strong></span>"}
+      ]
+    },
   }
 };
 
