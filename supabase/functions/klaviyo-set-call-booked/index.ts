@@ -17,7 +17,7 @@ serve(async (req) => {
     const KLAVIYO_API_KEY = Deno.env.get("KLAVIYO_API_KEY");
 
     const res = await fetch("https://a.klaviyo.com/api/profiles/", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Authorization": `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
         "Content-Type": "application/json",
