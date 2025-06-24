@@ -17,7 +17,7 @@ export default function Results({ name = "Founder", email = "", answers = {}, sc
     <div className="bg-[#275659] text-[#F1FDED] min-h-screen flex flex-col items-center gap-14 py-16 px-4 sm:px-8 lg:px-32">
       {/* Score & Time Sections */}
       <ScorecardBenchmarkDesktop score={score} zone={zone} color={color} benchmark={64} />
-      <LeverageCalculatorDesktop revenue={answers.revenue} workHrs={workHrs} />
+      <LeverageCalculatorDesktop scoreZone={zone} color={color} />
       <AdditionalNotes chokePoints={chokePoints} />
 
       {score < 80 && (
@@ -25,16 +25,16 @@ export default function Results({ name = "Founder", email = "", answers = {}, sc
           <p className="text-sm text-green-400 tracking-wider uppercase">
             Most founders never fix this.
           </p>
-          <h3 className="text-5xl font-bold">Get your time back</h3>
+          <h3 className="text-5xl font-bold">Get back control...</h3>
           <p className="text-2xl text-gray-300 max-w-3xl mx-auto">
-            We’ll show you 2 things to delegate this week. Live.
+            We’ll show you 2 ways how to improve your score and break free!
           </p>
 
           <div className="flex flex-col items-center gap-4 max-w-3xl mx-auto">
             <div className="flex items-start gap-4 text-left">
               <div className="border-l-4 border-green-400 pl-4">
                 <p className="text-2xl italic text-white leading-snug">
-                  “I was doing 54h. Now 32h. Took 3 weeks.”
+                  “I was slave to my business for years. Anatoly & Sandra opened my eyes on what is really going on in my business...”
                 </p>
                 <div className="flex items-center gap-3 mt-3">
                   <div className="w-10 h-10 rounded-full bg-white text-[#0f373c] font-bold flex items-center justify-center text-lg">
@@ -46,7 +46,7 @@ export default function Results({ name = "Founder", email = "", answers = {}, sc
             </div>
           </div>
 
-          <div className="rounded-lg overflow-hidden ring-2 ring-white ring-opacity-10 mt-6">
+          <div className="mx-auto max-w-4xl rounded-lg overflow-hidden ring-2 ring-white ring-opacity-10 mt-6">
             <Cal
               namespace="clarity-audit"
               calLink={`anatolyspektor/clarity-audit?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`}

@@ -30,34 +30,89 @@ export const rangeMidpoint = (label) => {
   };
 
 
-export const moneyLost = (workHrs, revenueLabel, hourlyRate = 250) => {
-  const benchmark = getBenchmarkHours(revenueLabel);
-  const extraHours = Math.max(workHrs - benchmark, 0);
-  return extraHours * hourlyRate;
+export const moneyLost = (scoreZone) => {
+  switch (scoreZone) {
+    case "RED":
+      return "$5K – $10K+ / week";
+    case "YELLOW":
+      return "$1K – $5K / week";
+    case "GREEN":
+      return "Minimal — you're in control";
+    default:
+      return "Unknown";
+  }
 };
 
 export const getChokePoints = (a) => {
   const points = [];
 
-  if (a.processDocs === "None") points.push("No documented SOPs – staff must ask you before every shipment.");
-  if (["1–3", "4–7", "8–15"].includes(a.processDocs)) points.push("<strong>Insufficient SOPs</strong> – most work still depends on your input.");
-  if (a.dailyInterrupts && a.dailyInterrupts !== "0–5") points.push(`<strong>${a.dailyInterrupts}</strong> staff interruptions per day turns you into the help desk.`);
-  if (["Tired but coping", "Running on fumes", "Close to burnout", "Already burnt out"].includes(a.energyLevel)) {
-    points.push(`Energy warning – you're currently <strong>${a.energyLevel.toLowerCase()}</strong>. Time to reclaim mental space.`);
+  // Process docs
+  switch (a.processDocs) {
+    case "I'd get calls hourly":
+      points.push("Team would call you constantly — you’re still the ops brain.");
+      break;
+    case "It’d collapse by day 3":
+      points.push("You’re holding the whole system together. Not scalable.");
+      break;
+    case "Some stuff might slow down":
+      points.push("Partial dependency on you — progress stalls without you.");
+      break;
   }
+
+  // Time invested
+  switch (a.weeklyHours) {
+    case "I'm deep in ops most days":
+      points.push("You’re buried in daily work — no space to actually lead.");
+      break;
+    case "Every hour is booked solid":
+      points.push("Zero margin — your calendar runs you.");
+      break;
+    case "Chaos — I’m everywhere":
+      points.push("You’re putting out fires instead of building fireproof systems.");
+      break;
+  }
+
+  // Interruptions
+  switch (a.dailyInterrupts) {
+    case "Constant Slack/DMs":
+      points.push("You’re on-call 24/7 — can’t step away without pings.");
+      break;
+    case "I’m the bottleneck daily":
+      points.push("Every decision flows through you — ops can’t breathe.");
+      break;
+    case "A few questions a day":
+      points.push("Your team still depends on you too much for day-to-day.");
+      break;
+  }
+
+  // Ops tracking (multi)
   const ops = a.opsTracking || [];
-
-
-  if (ops.some(opt => ["Spreadsheets", "Simple software"].includes(opt))) {
-    points.push("<strong>Tracking is basic</strong> – hard to spot errors or delegate confidently.");
-  } else if (ops.some(opt => ["In my head / paper notes", "We don’t really track it"].includes(opt))) {
-    points.push("Ops & inventory tracking is unreliable or non-existent.");
+  if (ops.includes("Spreadsheets + manual review")) {
+    points.push("You track things manually — easy to miss errors.");
+  }
+  if (ops.includes("Mostly in my head")) {
+    points.push("Info lives in your head — can’t delegate what’s not documented.");
+  }
+  if (ops.includes("Honestly… we don’t")) {
+    points.push("You have no real tracking — massive blind spot.");
   }
 
-  if (["51–60", "61–70", "71+"].includes(a.weeklyHours)) points.push(`Working <strong>${a.weeklyHours}</strong> hours/week – you're the engine *and* the brakes.`);
+  // Energy
+  switch (a.energyLevel) {
+    case "Trapped in the day-to-day":
+      points.push("You feel stuck in the weeds — not running the business, just surviving it.");
+      break;
+    case "Exhausted but pushing through":
+      points.push("You're pushing hard but close to burning out.");
+      break;
+    case "Done — I want out":
+      points.push("Burnout alert — you’re checked out mentally.");
+      break;
+  }
 
   return points;
 };
+
 
 export const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -91,7 +146,7 @@ export const generateScorecard = (answers) => {
     p.replace(/<\/?[^>]+(>|$)/g, "")
   );
   const { zone, color } = zoneLabel(score);
-  const bleedPerWeek = moneyLost(workHrs,answers.revenue);
+  const bleedPerWeek = moneyLost(zone);
 
   return {
     score,

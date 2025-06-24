@@ -150,7 +150,7 @@ export default function QuizMobile({ onComplete }) {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-10" style={{ backgroundColor: "#275659" }}>
+    <section className="min-h-screen flex items-center justify-center px-4 py-10" style={{ backgroundColor:"#0f373c"}}>
       <div className="w-full px-2 py-8 text-center">
         <div className="mb-30">
           <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -158,7 +158,7 @@ export default function QuizMobile({ onComplete }) {
               className="h-full transition-all duration-300"
               style={{
                 width: `${((step + 1) / TOTAL_QUESTIONS) * 100}%`,
-                backgroundColor: "#FF8257",
+                backgroundColor: "#FF5C5C",
               }}
             ></div>
           </div>
@@ -208,7 +208,7 @@ export default function QuizMobile({ onComplete }) {
                 className={`w-full rounded-2xl px-6 py-6 text-5xl mt-10 transition ${
                   isSelected(opt.label) ? "ring-2 ring-offset-2 ring-white" : ""
                 }`}
-                style={{ backgroundColor: "#FF8257", color: "#F1FDED" }}
+                style={{ backgroundColor: "#FF5C5C", color: "#F1FDED" }}
               >
                 {opt.label}
               </button>

@@ -145,7 +145,7 @@ export default function QuizDesktop({ onComplete }) {
 
   if (isQuizFinished) {
     return (
-              <EmailGateDesktop
+        <EmailGateDesktop
           name={name}
           email={email}
           setName={setName}
@@ -153,11 +153,12 @@ export default function QuizDesktop({ onComplete }) {
           error={error}
           onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
         />
-    );
+      );
   }
 
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-8 py-1" style={{ backgroundColor: "#275659" }}>
+    <section className="min-h-screen flex items-center justify-center px-8 py-1" style={{ backgroundColor: "#0f373c" }}>
       <div className="w-full max-w-3xl px-8 py-12 text-center shadow-sm rounded-lg">
         <div className="mb-10">
           <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -165,7 +166,7 @@ export default function QuizDesktop({ onComplete }) {
               className="h-full transition-all duration-300"
               style={{
                 width: `${((step + 1) / TOTAL_QUESTIONS) * 100}%`,
-                backgroundColor: "#FF8257",
+                backgroundColor: "#FF5C5C",
               }}
             ></div>
           </div>
@@ -219,7 +220,7 @@ export default function QuizDesktop({ onComplete }) {
                 className={`w-full rounded-md px-6 py-5 text-lg font-semibold hover:opacity-90 transition ${
                   isSelected(opt.label) ? "ring-2 ring-offset-2 ring-white" : ""
                 }`}
-                style={{ backgroundColor: "#FF8257", color: "#F1FDED" }}
+                style={{ backgroundColor: "#FF5C5C", color: "#F1FDED" }}
               >
                 {opt.label}
               </button>

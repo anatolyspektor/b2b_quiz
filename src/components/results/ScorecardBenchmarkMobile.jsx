@@ -20,7 +20,7 @@ export default function ScorecardBenchmarkMobile({
 
   return (
     <div className="w-full max-w-5xl mx-auto rounded-xl bg-[#0f373c] text-white shadow-lg p-8 space-y-5">
-      <h3 className="text-6xl font-bold text-center">Dependency Score</h3>
+      <h3 className="text-7xl font-bold text-center">Dependency Score</h3>
 
       <div className="flex flex-col items-center gap-10">
         {/* Circle */}
@@ -72,20 +72,20 @@ export default function ScorecardBenchmarkMobile({
         </div>
 
         {/* Text */}
-        <div className="text-center space-y-6 max-w-md">
+        <div className="text-center space-y-6 max-w-lg">
           <p className="text-5xl font-medium leading-snug">
             You're <span className="font-bold">{boundedPercentile >= 50 ? "above" : "below"}</span>{" "}
             <span className={textColor[zone] + " font-bold"}>{boundedPercentile}%</span> of founders.
           </p>
           {zone === "RED" && boundedPercentile < 50 && (
-            <p className="text-3xl text-gray-300">
+            <p className="text-4xl text-gray-300">
               That’s why everything still runs through you.
             </p>
           )}
 
           {zone === "YELLOW" && (
-            <p className="text-3xl text-gray-300">
-              You’re doing better, but things still often run through you.
+            <p className="text-4xl text-gray-300">
+               Most founders score around {benchmark}. Target for true freedom is 85+.
             </p>
           )}
 
