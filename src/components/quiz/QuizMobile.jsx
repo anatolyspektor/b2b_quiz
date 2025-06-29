@@ -137,17 +137,29 @@ export default function QuizMobile({ onComplete }) {
   };
 
   if (isQuizFinished) {
+    const scorecard = generateScorecard(finalAnswers); // make sure this exists or move from submit handler
+    const chokePointsHTML = getChokePoints(answers);
+
     return (
-        <EmailGateMobile
-          name={name}
-          email={email}
-          setName={setName}
-          setEmail={setEmail}
-          error={error}
-          onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
-        />
-      );
+      <EmailGateMobile
+        name={name}
+        email={email}
+        setName={setName}
+        setEmail={setEmail}
+        error={error}
+        onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
+
+        // 👇 preview data
+        score={scorecard.score}
+        zone={scorecard.zone}
+        color={scorecard.color}
+        workHrs={scorecard.workHrs}
+        bleedPerWeek={scorecard.bleedPerWeek}
+        chokePoints={chokePointsHTML}
+      />
+    );
   }
+
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-10" style={{ backgroundColor:"#0f373c"}}>

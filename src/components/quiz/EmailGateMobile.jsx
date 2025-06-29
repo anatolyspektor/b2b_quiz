@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import ScorecardBenchmarkMobile from "../results/ScorecardBenchmarkMobile";
+import LeverageCalculatorMobile from "../results/LeverageCalculatorMobile";
+import AdditionalNotes from "../results/AdditionalNotes";
 
-export default function EmailGate({ name, email, setName, setEmail, onSubmit, error }) {
+export default function EmailGateMobile({
+  name,
+  email,
+  setName,
+  setEmail,
+  onSubmit,
+  error,
+  score,
+  zone,
+  color,
+  workHrs,
+  bleedPerWeek,
+  chokePoints
+}) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 bg-[#275659] overflow-hidden">
-      {/* Blurred Background */}
-      <img
-        src="/mobile-scorecard.png"
-        alt="Score Preview"
-        className="absolute inset-0 w-full h-full object-cover blur-md opacity-50 scale-105 z-0"
-      />
+    <section className="relative min-h-screen flex flex-col items-center justify-start px-4 py-10 bg-[#275659] overflow-y-auto">
+      
+      {/* 1. Blurred Dependency Score */}
+      <div className="mb-12 w-full">
+        <ScorecardBenchmarkMobile score={score} zone={zone} benchmark={64} preview />
+      </div>
 
-      {/* Foreground Content */}
-      <div className="relative z-10 w-full bg-[#275659]/90 backdrop-blur-sm rounded-xl px-4 py-8 text-center shadow-sm">
-        <h2 className="text-6xl mb-15 leading-snug text-[#F1FDED]">
-          See how you compare and what’s keeping you <strong>STUCK</strong>.
-        </h2>
-        <p className="text-3xl text-[#F1FDED] mb-10">
-          We’ll also email you a copy for your records.
-        </p>
+      {/* 2. Email Form */}
+      <div className="relative z-10 w-full bg-[#1a3b3b] backdrop-blur-sm bg-opacity-80 rounded-xl px-4 py-8 text-center shadow-md">
         <input
           type="text"
-          placeholder="Your name..."
+          placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="mt-4 w-full rounded-md border px-10 py-10 text-5xl shadow-sm placeholder-white"
-          style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
+          style={{
+            color: "#F1FDED",
+            borderColor: "#F1FDED",
+            backgroundColor: "transparent",
+          }}
         />
         <input
           type="email"
@@ -32,7 +45,11 @@ export default function EmailGate({ name, email, setName, setEmail, onSubmit, er
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="mt-4 w-full rounded-md border px-10 py-10 text-5xl shadow-sm placeholder-white"
-          style={{ color: "#F1FDED", borderColor: "#F1FDED", backgroundColor: "transparent" }}
+          style={{
+            color: "#F1FDED",
+            borderColor: "#F1FDED",
+            backgroundColor: "transparent",
+          }}
         />
         {error && <p className="text-red-400 text-4xl mt-4">{error}</p>}
 
@@ -40,12 +57,17 @@ export default function EmailGate({ name, email, setName, setEmail, onSubmit, er
           onClick={onSubmit}
           className="mt-6 w-full rounded-md px-10 py-10 text-white text-6xl font-semibold transition bg-red-500 hover:bg-red-600"
         >
-          REVEAL MY SCORE
+          Show Full Scorecard
         </button>
+      </div>
 
-        <p className="text-3xl text-center text-[#F1FDED] mt-10">
-          Private report. No spam. <strong>Based on 150+ $2M+ founders.</strong>
-        </p>
+      {/* 3. Blurred Hidden Cost */}
+      <div className="mt-12 w-full">
+        <LeverageCalculatorMobile scoreZone={zone} color={color} preview />
+      </div>
+
+      <div className="mt-12 w-full max-w-4xl">
+       <AdditionalNotes chokePoints={chokePoints} preview />
       </div>
     </section>
   );

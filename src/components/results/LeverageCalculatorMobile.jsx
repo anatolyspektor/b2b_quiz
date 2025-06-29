@@ -1,7 +1,7 @@
 import React from "react";
 import { moneyLost } from "@/utils/quizUtils";
 
-export default function LeverageCalculatorMobile({ scoreZone, color }) {
+export default function LeverageCalculatorMobile({ scoreZone, color, preview = false }) {
   const moneyBleed = moneyLost(scoreZone);
 
   return (
@@ -12,8 +12,12 @@ export default function LeverageCalculatorMobile({ scoreZone, color }) {
         Founders in this zone typically lose:
       </div>
 
-      <div className={` mx-auto max-w-lg text-center text-5xl font-bold  ${color}`}>
-        {moneyBleed}
+      <div className={`mx-auto max-w-lg text-center text-5xl font-bold ${color}`}>
+        {preview ? (
+          <span className="blur-sm select-none">{moneyBleed}</span>
+        ) : (
+          moneyBleed
+        )}
       </div>
 
       <p className="text-center text-3xl text-white/80 mt-4">

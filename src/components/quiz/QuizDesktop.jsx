@@ -144,18 +144,26 @@ export default function QuizDesktop({ onComplete }) {
   };
 
   if (isQuizFinished) {
-    return (
-        <EmailGateDesktop
-          name={name}
-          email={email}
-          setName={setName}
-          setEmail={setEmail}
-          error={error}
-          onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
-        />
-      );
-  }
+    const scorecard = generateScorecard(finalAnswers);
+    const chokePointsHTML = getChokePoints(answers);
 
+    return (
+      <EmailGateDesktop
+        name={name}
+        email={email}
+        setName={setName}
+        setEmail={setEmail}
+        error={error}
+        onSubmit={() => handleFinalSubmit({ sessionId, name, email })}
+        score={scorecard.score}
+        zone={scorecard.zone}
+        color={scorecard.color}
+        workHrs={scorecard.workHrs}
+        bleedPerWeek={scorecard.bleedPerWeek}
+        chokePoints={chokePointsHTML}
+      />
+    );
+  }
 
   return (
     <section className="min-h-screen flex items-center justify-center px-8 py-1" style={{ backgroundColor: "#0f373c" }}>

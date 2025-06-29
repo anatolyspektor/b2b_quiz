@@ -1,32 +1,43 @@
 import React from "react";
+import ScorecardBenchmarkDesktop from "../results/ScorecardBenchmarkDesktop";
+import LeverageCalculatorDesktop from "../results/LeverageCalculatorDesktop";
+import AdditionalNotes from "../results/AdditionalNotes";
 
-export default function EmailGateDesktop({ name, email, setName, setEmail, onSubmit, error }) {
+export default function EmailGateDesktop({
+  name,
+  email,
+  setName,
+  setEmail,
+  onSubmit,
+  error,
+  score,
+  zone,
+  color,
+  workHrs,
+  bleedPerWeek,
+  chokePoints
+}) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-8 py-10 bg-[#275659] overflow-hidden">
-      {/* Blurred Background */}
-      <img
-        src="/desktop-scorecard.png"
-        alt="Score Preview"
-        className="absolute inset-0 w-full h-full object-cover blur-md opacity-90 scale-105 z-0"
-      />
+    <section className="relative min-h-screen flex flex-col items-center justify-start px-8 py-10 bg-[#275659] overflow-y-auto">
 
-      {/* Foreground Content */}
-      <div className="relative z-10 w-full max-w-4xl bg-[#275659] px-8 py-10 text-center shadow-sm rounded-lg">
+      {/* 1. Score Preview */}
+      <div className="mb-12 w-full max-w-4xl">
+        <ScorecardBenchmarkDesktop
+          score={score}
+          zone={zone}
+          benchmark={64}
+          preview
+        />
+      </div>
 
-        <h2 className="text-5xl mb-6 leading-snug text-[#F1FDED]">
-          See how you compare and what’s keeping you <strong>STUCK</strong>.
-        </h2>
-
-        <p className="text-2xl text-[#F1FDED] mb-10">
-          We’ll also email you a copy for your records.
-        </p>
-
+      {/* 2. Email Card (floating, dark green) */}
+      <div className="w-full max-w-4xl text-center space-y-6  rounded-xl bg-[#1a3b3b] backdrop-blur-sm bg-opacity-80 shadow-lg px-10 py-10">
         <input
           type="text"
-          placeholder="Your name..."
+          placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mt-6 w-full rounded-md border px-4 py-4 text-xl shadow-sm placeholder-white"
+          className="w-full rounded-md border px-6 py-5 text-2xl shadow-sm placeholder-white"
           style={{
             color: "#F1FDED",
             borderColor: "#F1FDED",
@@ -39,7 +50,7 @@ export default function EmailGateDesktop({ name, email, setName, setEmail, onSub
           placeholder="you@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-4 w-full rounded-md border px-4 py-4 text-xl shadow-sm placeholder-white"
+          className="w-full rounded-md border px-6 py-5 text-2xl shadow-sm placeholder-white"
           style={{
             color: "#F1FDED",
             borderColor: "#F1FDED",
@@ -47,19 +58,28 @@ export default function EmailGateDesktop({ name, email, setName, setEmail, onSub
           }}
         />
 
-        {error && <p className="text-red-400 text-xl mt-4">{error}</p>}
+        {error && <p className="text-red-400 text-xl">{error}</p>}
 
         <button
           onClick={onSubmit}
-          className="mt-6 w-full rounded-md px-6 py-5 text-white text-2xl font-semibold transition bg-red-500 hover:bg-red-600"
+          className="w-full rounded-md px-6 py-5 text-white text-2xl font-semibold transition bg-red-500 hover:bg-red-600"
         >
-          REVEAL MY SCORE
+          Show Full Scorecard
         </button>
-
-         <p className="text-xl text-center text-[#F1FDED] mt-10">
-          Private report. No spam. <strong>Based on 150+ $2M+ founders.</strong>
-        </p>
       </div>
+
+      {/* 3. Hidden Cost Preview (Blurred) */}
+      <div className="mt-12 w-full max-w-4xl">
+        <LeverageCalculatorDesktop
+          scoreZone={zone}
+          color={color}
+          preview
+        />
+      </div>
+      <div className="mt-12 w-full max-w-4xl">
+       <AdditionalNotes chokePoints={chokePoints} preview />
+      </div>
+
     </section>
   );
 }

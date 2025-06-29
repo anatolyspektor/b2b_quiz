@@ -1,7 +1,10 @@
+import React from "react";
+
 export default function ScorecardBenchmarkMobile({
   score = 0,
-  zone = "",         // "RED" | "YELLOW" | "GREEN"
+  zone = "", // "RED" | "YELLOW" | "GREEN"
   benchmark = 64,
+  preview = false,
 }) {
   const rawPercentile = 50 + ((score - benchmark) / (100 - benchmark)) * 50;
   const boundedPercentile = Math.max(1, Math.min(Math.round(rawPercentile), 99));
@@ -26,57 +29,27 @@ export default function ScorecardBenchmarkMobile({
         {/* Circle */}
         <div className="relative w-56 h-56">
           <svg viewBox="0 0 42 42" className="w-full h-full rotate-[-90deg]">
-            {/* RED: 0–40% */}
-            <circle
-              r="16"
-              cx="21"
-              cy="21"
-              fill="transparent"
-              stroke="red"
-              strokeWidth="4"
-              strokeDasharray="40 60"
-              strokeDashoffset="0"
-              strokeLinecap="butt"
-            />
-            {/* YELLOW: 40–75% (35%) */}
-            <circle
-              r="16"
-              cx="21"
-              cy="21"
-              fill="transparent"
-              stroke="#facc15"
-              strokeWidth="4"
-              strokeDasharray="35 65"
-              strokeDashoffset="-40"
-              strokeLinecap="butt"
-            />
-            {/* GREEN: 75–100% (25%) */}
-            <circle
-              r="16"
-              cx="21"
-              cy="21"
-              fill="transparent"
-              stroke="green"
-              strokeWidth="4"
-              strokeDasharray="25 75"
-              strokeDashoffset="-75"
-              strokeLinecap="butt"
-            />
+            {/* RED */}
+            <circle r="16" cx="21" cy="21" fill="transparent" stroke="red" strokeWidth="4" strokeDasharray="40 60" />
+            {/* YELLOW */}
+            <circle r="16" cx="21" cy="21" fill="transparent" stroke="#facc15" strokeWidth="4" strokeDasharray="35 65" strokeDashoffset="-40" />
+            {/* GREEN */}
+            <circle r="16" cx="21" cy="21" fill="transparent" stroke="green" strokeWidth="4" strokeDasharray="25 75" strokeDashoffset="-75" />
           </svg>
 
-
-          {/* Score inside */}
+          {/* Score in center */}
           <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full flex items-center justify-center text-[#0f373c] text-5xl font-bold ${zoneColors[zone]}`}>
             {score}
           </div>
         </div>
 
-        {/* Text */}
-        <div className="text-center space-y-6 max-w-lg">
+        {/* Text below — blurred if preview */}
+        <div className={`text-center space-y-6 max-w-lg ${preview ? "blur-sm select-none" : ""}`}>
           <p className="text-5xl font-medium leading-snug">
             You're <span className="font-bold">{boundedPercentile >= 50 ? "above" : "below"}</span>{" "}
             <span className={textColor[zone] + " font-bold"}>{boundedPercentile}%</span> of founders.
           </p>
+
           {zone === "RED" && boundedPercentile < 50 && (
             <p className="text-4xl text-gray-300">
               That’s why everything still runs through you.
@@ -85,10 +58,9 @@ export default function ScorecardBenchmarkMobile({
 
           {zone === "YELLOW" && (
             <p className="text-4xl text-gray-300">
-               Most founders score around {benchmark}. Target for true freedom is 85+.
+              Most founders score around {benchmark}. Target for true freedom is 85+.
             </p>
           )}
-
         </div>
       </div>
     </div>
